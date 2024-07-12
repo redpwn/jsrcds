@@ -1,0 +1,15 @@
+ctfName: testctf
+origin: https://127.0.0.1
+homeContent: welcome to test ctf!
+
+startTime: 0
+endTime: 9999999999
+
+meta:
+  description: this is a testing ctf
+  imageUrl: https://http.cat/images/100.jpg
+
+divisions:
+  testers: Testers
+
+tokenKey: QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE=

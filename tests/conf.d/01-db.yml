@@ -1,0 +1,9 @@
+database:
+  migrate: before
+  sql:
+    host: postgres
+    user: rctf
+    password: rdbpass234??
+  redis:
+    host: redis
+    password: rredispass234??

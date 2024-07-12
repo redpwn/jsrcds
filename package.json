@@ -6,11 +6,15 @@
   "dependencies": {
     "ajv": "^8.12.0",
     "commander": "^12.1.0",
-    "esbuild": "^0.20.0",
     "glob": "^10.3.10",
     "got": "^14.0.0",
     "handlebars": "^4.7.8",
+    "path": "^0.12.7",
     "typescript": "^5.5.3",
-    "yaml": "^2.3.4"
+    "yaml": "^2.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10"
   }
 }

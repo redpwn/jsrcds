@@ -1,22 +1,13 @@
 import path from "path";
-import yaml from "yaml";
+import fs from "fs";
+import { Challenge } from "./challenge";
 
-const getChallenge = async (globPath) => {
-  const configPath = path.join(repoRoot, globPath);
-  // full path to challenge dir
-  const dir = path.dirname(configPath);
-  // challenge dir in repo (category/name)
-  const segment = path.dirname(globPath).replaceAll(path.sep, "/");
-  if (!/^[a-z0-9/-]+$/.test(segment)) {
-    throw new Error(`invalid challenge segment: ${segment}`);
-  }
-  const config = yaml.parse(await fs.promises.readFile(configPath, "utf8"));
-  if (!validateConfig(config)) {
-    const [error] = validateConfig.errors;
-    throw new Error(
-      `invalid config: ${segment}: ${error.instancePath}: ${error.message}`
-    );
-  }
+// TODO: please modularize
+export const loadChallenge = async (challenge: Challenge, config: any) => {
+  const dir = challenge.dir;
+  const segment = challenge.segment;
+  const configPath = challenge.configPath;
+
   let flag;
   if (config.flag.file) {
     flag = (
@@ -26,7 +17,7 @@ const getChallenge = async (globPath) => {
     flag = config.flag;
   }
   const name = config.name ?? path.posix.basename(segment);
-  const challenge = {
+  const newChallenge: any = {
     configPath,
     segment,
     id: config.id ?? segment.toLowerCase().replaceAll("/", "-"),
@@ -42,29 +33,9 @@ const getChallenge = async (globPath) => {
     deployed: config.deployed ?? true,
     tiebreakEligible: config.tiebreakEligible ?? true,
     sortWeight: config.sortWeight ?? 0,
-    provide: await Promise.all(
-      (config.provide ?? []).map(async (entry) => {
-        if (entry.url) {
-          // dont upload file if url is provided
-          return {
-            name: entry.as ?? path.posix.basename(new URL(entry.url).pathname),
-            url: entry.url,
-          };
-        }
-        const filePath = path.join(dir, entry.file ?? entry);
-        const name = entry.as ?? path.basename(filePath);
-        const hash = await hashFile(filePath);
-        const key = `${rootConfig.uploads.prefix}/${hash}/${name}`;
-        return {
-          name,
-          filePath,
-          key,
-          url: `https://${getBucketHost(rootConfig.uploads.bucket)}/${key}`,
-        };
-      })
-    ),
+    provide: [],
     containers: Object.fromEntries(
-      Object.entries(config.containers ?? {}).map(([name, entry]) => [
+      Object.entries(config.containers ?? {}).map(([name, entry]: any) => [
         name,
         {
           image: entry.image,
@@ -84,10 +55,10 @@ const getChallenge = async (globPath) => {
       ])
     ),
     expose: Object.fromEntries(
-      Object.entries(config.expose ?? {}).map(([name, entries]) => [
+      Object.entries(config.expose ?? {}).map(([name, entries]: any) => [
         name,
-        entries.map((entry) => {
-          const expose = {
+        entries.map((entry: any) => {
+          const expose: any = {
             target: entry.target,
             healthContent: entry.healthContent,
             rateLimit: entry.rateLimit,
@@ -125,14 +96,7 @@ const getChallenge = async (globPath) => {
         }),
       ])
     ),
-    instancer: config.instancer
-      ? {
-          name: config.instancer.name ?? name,
-          timeout: config.instancer.timeout,
-        }
-      : undefined,
-    adminbot: config.adminbot,
   };
-  challenge.description = templateChallenge(challenge, config.description);
-  return challenge;
+  newChallenge.description = templateChallenge(challenge, config.description);
+  return newChallenge;
 };

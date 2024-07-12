@@ -5,20 +5,20 @@ import handlebars from "handlebars";
 import rootConfig from "./config.js";
 import { deployTag, isPrd, repoRoot, tlsPort } from "./util.js";
 
-const templateChallenge = (challenge, description) => {
-  const model = { challenge };
+interface DescriptionModel {
+  host: string;
+
+  url: string;
+  link: string; // clickable URL
+
+  port: string;
+  nc: string;
+}
+
+const templateDescription = (challenge: any, description: string) => {
+  const model: DescriptionModel = { challenge };
   const exposes = Object.values(challenge.expose).flat();
-  if (challenge.adminbot) {
-    model.adminbot = `https://adminbot.${rootConfig.challengeHost}/${challenge.id}`;
-  }
-  if (challenge.instancer) {
-    // klodd challenges only have one expose
-    const kloddId = (exposes[0].http ?? exposes[0].tls.hostname).slice(
-      0,
-      -rootConfig.challengeHost.length - 1
-    );
-    model.instancer = `https://instancer.${rootConfig.challengeHost}/challenge/${kloddId}`;
-  }
+
   // only one expose; add unambiguous shortcuts to model
   if (exposes.length === 1) {
     model.host = exposes[0].http ?? exposes[0].host ?? exposes[0].tls.hostname;
