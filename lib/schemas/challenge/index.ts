@@ -1,15 +1,19 @@
 import { z } from "zod";
 import { domainSafeName } from "../utils";
-import ContainerConfig from "./container";
-import ExposeConfig from "./expose";
+import containerConfigSchema from "./container";
+import exposeConfigSchema from "./expose";
 
-export const ChallengeConfig = z
+export const challengeConfigSchema = z
   .object({
     id: domainSafeName
       .optional()
       .describe(
         "Override the automatically generated id for this challenge. You should avoid setting this whenever possible."
       ),
+    segment: z
+      .string()
+      .optional()
+      .describe("Path of this challenge from the challenge repository root."),
     name: z.string().describe("The name of the challenge"),
     author: z
       .union([z.string(), z.array(z.string())])
@@ -108,10 +112,10 @@ export const ChallengeConfig = z
       .describe(
         "Whether or not this challenge's containers should be deployed. Default true."
       ),
-    containers: ContainerConfig,
-    expose: ExposeConfig,
+    containers: containerConfigSchema,
+    expose: exposeConfigSchema,
   })
   .strict();
 
 // it's not really an interface but i dont want to deal with the duplicate name
-export type IChallengeConfig = z.infer<typeof ChallengeConfig>;
+export type ChallengeConfig = z.infer<typeof challengeConfigSchema>;

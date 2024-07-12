@@ -1,9 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import path from "path";
 import fs from "fs";
 import { Challenge } from "./challenge";
 
 // TODO: please modularize
-export const loadChallenge = async (challenge: Challenge, config: any) => {
+export const hydrateChallenges = async (challenge: Challenge) => {
   const dir = challenge.dir;
   const segment = challenge.segment;
   const configPath = challenge.configPath;
@@ -99,4 +102,20 @@ export const loadChallenge = async (challenge: Challenge, config: any) => {
   };
   newChallenge.description = templateChallenge(challenge, config.description);
   return newChallenge;
+};
+
+const hashFile = (name) =>
+  new Promise((resolve, reject) => {
+    const hash = crypto.createHash("sha256");
+    const stream = fs.createReadStream(name);
+    stream.on("error", reject);
+    stream.pipe(hash);
+    stream.on("end", () => resolve(hash.digest("hex")));
+  });
+
+const getBucketHost = (name) => {
+  if (name.includes(".")) {
+    return name;
+  }
+  return `${name}.storage.googleapis.com`;
 };

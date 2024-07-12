@@ -1,33 +1,18 @@
-import { glob } from "glob";
-import { Challenge } from "./challenge";
+import type { Loader, LoaderConfig } from "./loader";
 
-const getChallengePaths = async (repoRoot: string) => {
-  return await glob("**/challenge.y?(a)ml", {
-    cwd: repoRoot,
-  });
-};
+export const getChallenges = async (
+  loader: Loader<LoaderConfig>,
+  config: LoaderConfig
+): Promise<{
+  challenges: any[];
+  errors: any[];
+}> => {
+  const challenges: any[] = [];
+  const errors: any[] = [];
 
-export const getChallenges = async (repoRoot: string) => {
-  const challenges = [];
-  const errors = [];
-
-  for (const globPath of await getChallengePaths(repoRoot)) {
-    try {
-      // validation issues should not block other challenges
-      const challenge = new Challenge(repoRoot, globPath);
-      challenge.readConfigFile();
-      // await validateChallenge(challenge);
-      challenges.push(challenge);
-    } catch (err) {
-      errors.push(err);
-    }
+  // validation issues should not block other challenges
+  for (const challenge of await loader.getChallenges(config)) {
   }
 
-  try {
-    // challenge uniqueness issues should only block deploys, not builds
-    // validateChallenges(challenges);
-  } catch (err) {
-    errors.push(err);
-  }
   return { challenges, errors };
 };

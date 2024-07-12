@@ -11,4 +11,5 @@
 // export const validateConfig = ajv.compile(configSchema);
 // export const validateChallengeConfig = ajv.compile(challengeSchema);
 
-export { type IChallengeConfig, ChallengeConfig } from "./challenge";
+// this is the new zod schema
+export { type ChallengeConfig, challengeConfigSchema } from "./challenge";
