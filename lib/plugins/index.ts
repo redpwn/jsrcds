@@ -1,3 +1,6 @@
-// a plugin recieves information in the config (either through a config hook or through the plugins  )
+export abstract class Plugin {
+  abstract readonly key: string;
 
-abstract class Plugin {}
+  abstract subscribeChannels: Record<string, any>;
+  abstract publishChannels: string[];
+}

@@ -9,7 +9,6 @@ export const getChallenges = async (
   const challenges: any[] = [];
   const errors: any[] = [];
 
-  // validation issues should not block other challenges
   for (const challenge of await loader.getChallenges()) {
   }
 
