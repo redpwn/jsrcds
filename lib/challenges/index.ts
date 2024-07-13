@@ -6,11 +6,5 @@ export const getChallenges = async (
   challenges: any[];
   errors: any[];
 }> => {
-  const challenges: any[] = [];
-  const errors: any[] = [];
-
-  for (const challenge of await loader.getChallenges()) {
-  }
-
-  return { challenges, errors };
+  return { challenges: await loader.getChallenges(), errors: [] };
 };

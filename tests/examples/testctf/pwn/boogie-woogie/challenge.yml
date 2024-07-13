@@ -42,4 +42,5 @@ plugins:
       - target: 5000
         tcp: 31040
         healthContent: proof of work
+
 sortWeight: 50

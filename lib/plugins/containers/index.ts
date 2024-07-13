@@ -39,3 +39,9 @@
 //       );
 //     }
 //   }
+
+import { Plugin } from "..";
+
+export default class Containers extends Plugin {
+  key = "containers";
+}
