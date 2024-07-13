@@ -30,7 +30,7 @@ export class FileLoader extends Loader<FileLoaderConfig> {
 
         const schema = createChallengeConfigSchema(this, segment);
 
-        return schema.parseAsync(config);
+        return schema.parseAsync(config); // TODO: use safeParseAsync and handle errors properly
       })
     );
   }

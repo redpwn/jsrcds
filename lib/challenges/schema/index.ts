@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { domainSafeName } from "../../schemas/utils";
+import { domainSafeName } from "../../utils";
 
 import path from "path";
 
@@ -90,7 +90,7 @@ export const createChallengeConfigSchema = (
           "Whether or not this challenge's containers should be deployed. Default true."
         ),
       plugins: z
-        .array(z.any())
+        .any()
         .default([])
         .describe("List of challenge plugins to use."),
     })
