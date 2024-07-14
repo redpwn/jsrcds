@@ -1,4 +1,4 @@
-import ContainerConfig from "./container";
+import ContainerSchema from "./container";
 // SCHEMA STUFF
 
 // Object.fromEntries(
@@ -51,7 +51,7 @@ export default class ContainersPlugin extends Plugin {
   }
 }
 
-export class ContainersBlock extends ResourceBlockConfig<any> {
+export class ContainersBlockConfig extends ResourceBlockConfig<any> {
   public key = "containers";
-  public schema = ContainerConfig;
+  public schema = ContainerSchema;
 }
