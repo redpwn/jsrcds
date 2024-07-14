@@ -1,4 +1,4 @@
-import hcl from "js-hcl-parser"
+import hcl from "js-hcl-parser";
 import path from "path";
 import { glob } from "glob";
 
@@ -16,7 +16,7 @@ export class ResourceFileLoader extends Loader<ClassicFileLoaderConfig> {
       cwd: this.config.repoRoot,
     });
 
-    return Promise.all(
+    return await Promise.all(
       challengeList.map(async (globPath) => {
         const configPath = path.join(this.config.repoRoot, globPath);
 
@@ -26,7 +26,7 @@ export class ResourceFileLoader extends Loader<ClassicFileLoaderConfig> {
         }
 
         const hclString = (await fs.promises.readFile(configPath)).toString();
-        return hcl.parse(hclString);
+        return JSON.parse(hcl.parse(hclString));
       })
     );
   }
