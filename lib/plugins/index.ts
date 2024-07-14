@@ -1,3 +1,5 @@
 export abstract class Plugin {
-  abstract readonly key: string;
+  public abstract readonly key: string;
+
+  public abstract getChallengeConfigSchema(): any;
 }
