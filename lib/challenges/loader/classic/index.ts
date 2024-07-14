@@ -1,18 +1,21 @@
 import path from "path";
 import { glob } from "glob";
 
-import { loadYaml } from "../../util";
-import { type ChallengeConfig, createChallengeConfigSchema } from "../schema";
+import { loadYaml } from "../../../util";
+import {
+  type ChallengeConfig,
+  createChallengeConfigSchema,
+} from "../../schema";
 
 import fs from "fs";
 
-import { Loader } from ".";
+import { Loader } from "..";
 
-export interface FileLoaderConfig {
+export interface ClassicFileLoaderConfig {
   repoRoot: string;
 }
 
-export class FileLoader extends Loader<FileLoaderConfig> {
+export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   async getChallenges(): Promise<ChallengeConfig[]> {
     const challengeList = await glob("**/challenge.y?(a)ml", {
       cwd: this.config.repoRoot,

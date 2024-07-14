@@ -1,7 +1,7 @@
 import path from "path";
 
 import { getChallenges } from "./challenges";
-import { FileLoader } from "./challenges/loader/file";
+import { FileLoader } from "./challenges/loader/classic";
 
 import { PluginManager } from "./plugins/manager";
 
