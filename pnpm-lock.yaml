@@ -23,6 +23,9 @@ importers:
       handlebars:
         specifier: ^4.7.8
         version: 4.7.8
+      js-hcl-parser:
+        specifier: ^1.0.1
+        version: 1.0.1
       path:
         specifier: ^0.12.7
         version: 0.12.7
@@ -188,6 +191,9 @@ packages:
   jackspeak@3.4.2:
     resolution: {integrity: sha512-qH3nOSj8q/8+Eg8LUPOq3C+6HWkpUioIjDsq1+D4zY91oZvpPttw8GwtF1nReRYKXl+1AORyFqtm2f5Q1SB6/Q==}
     engines: {node: 14 >=14.21 || 16 >=16.20 || >=18}
+
+  js-hcl-parser@1.0.1:
+    resolution: {integrity: sha512-fCs/gex31g5FYiXItz6UJBJpKnQoRE7+B3yVv6YqPKce9/k/a0QlJXjoicfvt8jGLy8CHKJ641RXe93xSZCM7A==}
 
   json-buffer@3.0.1:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
@@ -509,6 +515,8 @@ snapshots:
       '@isaacs/cliui': 8.0.2
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
+
+  js-hcl-parser@1.0.1: {}
 
   json-buffer@3.0.1: {}
 
