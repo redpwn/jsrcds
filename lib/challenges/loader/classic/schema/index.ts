@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { domainSafeName } from "../../utils";
+import { domainSafeName } from "../../../../utils";
 
 import path from "path";
 
-import type { Loader, LoaderConfig } from "../loader";
+import type { Loader, LoaderConfig } from "../../../loader";
 
 export const createChallengeConfigSchema = (
   loader: Loader<LoaderConfig>,
