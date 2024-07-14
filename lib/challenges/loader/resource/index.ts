@@ -1,5 +1,5 @@
 // @ts-ignore since there is no type definition for js-hcl-parser
-import hcl from "js-hcl-parser";
+import hcl from "@cdktf/hcl2json";
 import path from "path";
 import { glob } from "glob";
 
@@ -7,11 +7,11 @@ import fs from "fs";
 
 import { Loader } from "..";
 
-export interface ClassicFileLoaderConfig {
+export interface ResourceFileLoaderConfig {
   repoRoot: string;
 }
 
-export class ResourceFileLoader extends Loader<ClassicFileLoaderConfig> {
+export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   async getChallenges(): Promise<any[]> {
     const challengeList = await glob("**/challenge.hcl", {
       cwd: this.config.repoRoot,
@@ -27,7 +27,7 @@ export class ResourceFileLoader extends Loader<ClassicFileLoaderConfig> {
         }
 
         const hclString = (await fs.promises.readFile(configPath)).toString();
-        return JSON.parse(hcl.parse(hclString));
+        return hcl.parse(configPath, hclString);
       })
     );
   }

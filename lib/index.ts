@@ -11,7 +11,7 @@ const { challenges, errors } = await getChallenges(
   })
 );
 
-console.log(challenges);
+console.log(challenges[0]);
 
 // const pluginManager = PluginManager.createDefaultManager();
 

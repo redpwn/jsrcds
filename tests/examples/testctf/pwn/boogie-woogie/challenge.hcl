@@ -1,21 +1,14 @@
 challenge {
   name = "boogie-woogie"
   author = "pepsipu"
-  description = "EOT i've been watching too much jjk EOT"
+  description = "i've been watching too much jjk\n ${network.nc}"
 }
 
 upload {
     files = ["src/boogie-woogie.c", {
         name = "boogie-woogie"
-        content = "containers.build.file(/app/boogie-woogie)"
+        content = file(containers.build, "/app/boogie-woogie")
     }]
-}
-
-network {
-    target = 5000
-    tcp = 31040
-    healthContent = "proof of work"
-    container = "containers.main"
 }
 
 containers {
@@ -28,3 +21,12 @@ containers {
         build = "src/build"
     }
 }
+
+network {
+    target = 5000
+    tcp = 31040
+    healthContent = "proof of work"
+    container = containers.build
+}
+
+
