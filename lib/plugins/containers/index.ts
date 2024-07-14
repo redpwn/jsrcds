@@ -1,3 +1,4 @@
+import ContainerConfig from "./container";
 // SCHEMA STUFF
 
 // Object.fromEntries(
@@ -40,8 +41,17 @@
 //     }
 //   }
 
-import { Plugin } from "..";
+import { Plugin, ResourceBlockConfig } from "..";
 
-export default class Containers extends Plugin {
-  key = "containers";
+export default class ContainersPlugin extends Plugin {
+  public readonly name = "container"
+
+  public getChallengeConfigSchema() {
+    return {};
+  }
+}
+
+export class ContainersBlock extends ResourceBlockConfig<any> {
+  public key = "containers";
+  public schema = ContainerConfig;
 }
