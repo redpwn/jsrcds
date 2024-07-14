@@ -1,3 +1,4 @@
+// @ts-ignore since there is no type definition for js-hcl-parser
 import hcl from "js-hcl-parser";
 import path from "path";
 import { glob } from "glob";
