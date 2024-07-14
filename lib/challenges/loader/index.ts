@@ -1,4 +1,3 @@
-import type { ChallengeConfig } from "../schema";
 import type { ClassicFileLoaderConfig } from "./classic";
 
 // a challenge loader generates a list of ChallengeConfig, which can then be validated and hydrated
@@ -10,7 +9,7 @@ export abstract class Loader<LoaderConfig> {
     this.config = config;
   }
 
-  abstract getChallenges(): Promise<ChallengeConfig[]>;
+  abstract getChallenges(): Promise<any[]>;
   abstract getResource(segment: string, path: string): Promise<string>;
 }
 
