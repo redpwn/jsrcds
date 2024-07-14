@@ -1,3 +1,5 @@
+import ExposeSchema from "./expose"
+
 // Object.fromEntries(
 //     Object.entries(config.expose ?? {}).map(([name, entries]: any) => [
 //       name,
@@ -82,3 +84,18 @@
 //       }
 //     }
 //   }
+
+import { Plugin, ResourceBlockConfig } from "..";
+
+export class ExposePlugin extends Plugin {
+  public readonly name = "expose";
+
+  public getChallengeConfigSchema() {
+    return {};
+  }
+}
+
+export class ExposeBlockConfig extends ResourceBlockConfig<any> {
+  public key = "expose";
+  public schema = ExposeSchema;
+}
