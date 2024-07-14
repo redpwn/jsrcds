@@ -1,3 +1,4 @@
+import hcl from "js-hcl-parser"
 import path from "path";
 import { glob } from "glob";
 
@@ -11,7 +12,7 @@ export interface ClassicFileLoaderConfig {
 
 export class ResourceFileLoader extends Loader<ClassicFileLoaderConfig> {
   async getChallenges(): Promise<any[]> {
-    const challengeList = await glob("**/challenge.y?(a)ml", {
+    const challengeList = await glob("**/challenge.hcl", {
       cwd: this.config.repoRoot,
     });
 
@@ -23,6 +24,9 @@ export class ResourceFileLoader extends Loader<ClassicFileLoaderConfig> {
         if (!/^[a-z0-9/-]+$/.test(segment)) {
           throw new Error(`invalid challenge segment name: ${segment}`);
         }
+
+        const hclString = (await fs.promises.readFile(configPath)).toString();
+        return hcl.parse(hclString);
       })
     );
   }

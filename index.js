@@ -1,3 +1,6 @@
+import HCL from "js-hcl-parser"
+
+const hclString = `
 challenge {
   name = "boogie-woogie"
   author = "pepsipu"
@@ -28,3 +31,7 @@ containers {
         build = "src/build"
     }
 }
+
+`
+
+console.log(HCL.parse(hclString))

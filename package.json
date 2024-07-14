@@ -9,6 +9,7 @@
     "glob": "^10.3.10",
     "got": "^14.0.0",
     "handlebars": "^4.7.8",
+    "js-hcl-parser": "^1.0.1",
     "path": "^0.12.7",
     "typescript": "^5.5.3",
     "yaml": "^2.4.5",

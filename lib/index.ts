@@ -1,15 +1,17 @@
 import path from "path";
 
 import { getChallenges } from "./challenges";
-import { ClassicFileLoader } from "./challenges/loader/classic";
+import { ResourceFileLoader } from "./challenges/loader/resource";
 
 // import { PluginManager } from "./plugins/manager";
 
 const { challenges, errors } = await getChallenges(
-  new ClassicFileLoader({
+  new ResourceFileLoader({
     repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
   })
 );
+
+console.log(challenges);
 
 // const pluginManager = PluginManager.createDefaultManager();
 
