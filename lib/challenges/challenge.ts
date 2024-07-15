@@ -1,7 +1,7 @@
 import { Loader, type LoaderConfig } from "./loader";
 import { Plugin } from "../plugins";
 
-class ChallengeRegistry {
+export class ChallengeRegistry {
   private loader: Loader<LoaderConfig>;
   private plugins: Plugin[];
 
@@ -10,10 +10,11 @@ class ChallengeRegistry {
     this.plugins = plugins;
   }
 
-  constructChallenge(resources: any[]) {}
-}
-class Challenge {
-  // resource DAG
+  async loadChallenges() {
+    const challenges = await this.loader.getChallenges();
+    console.log(challenges);
+    this.constructChallenge(challenges);
+  }
 
-  initializeResourceBlocks() {}
+  constructChallenge(resources: any[]) {}
 }

@@ -7,7 +7,7 @@ challenge {
 upload {
     files = ["src/boogie-woogie.c", {
         name = "boogie-woogie"
-        content = file(containers.build, "/app/boogie-woogie")
+        content = container_file(containers.build, "/app/boogie-woogie")
     }]
 }
 
