@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "docs": "npx typedoc"
+  },
   "dependencies": {
     "@cdktf/hcl2json": "^0.20.8",
     "ajv": "^8.12.0",
