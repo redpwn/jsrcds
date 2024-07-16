@@ -3,12 +3,12 @@ import { z } from "zod";
 export abstract class ResourceBlock {
   public abstract key: string;
 
-  public methods: Record<
+  public static methods: Record<
     string,
     { inputSchema: Zod.ZodObject<any>; outputSchema: Zod.ZodObject<any> }
   > = {};
 
-  maybeInitializeMethodRecord(methodName: string) {
+  static maybeInitializeMethodRecord(methodName: string) {
     if (!this.methods[methodName]) {
       this.methods[methodName] = {
         inputSchema: z.object({}),
@@ -17,11 +17,17 @@ export abstract class ResourceBlock {
     }
   }
 
-  addInputSchemaToMethod(methodName: string, schema: Zod.ZodObject<any>) {
+  static addInputSchemaToMethod(
+    methodName: string,
+    schema: Zod.ZodObject<any>
+  ) {
     this.maybeInitializeMethodRecord(methodName);
     this.methods[methodName]!.inputSchema = schema;
   }
-  addOutputSchemaToMethod(methodName: string, schema: Zod.ZodObject<any>) {
+  static addOutputSchemaToMethod(
+    methodName: string,
+    schema: Zod.ZodObject<any>
+  ) {
     this.maybeInitializeMethodRecord(methodName);
     this.methods[methodName]!.outputSchema = schema;
   }
@@ -32,15 +38,7 @@ export abstract class ResourceBlock {
       propertyKey: string | symbol,
       descriptor: PropertyDescriptor
     ) => {
-      target.addInputSchemaToMethod(propertyKey.toString(), schema);
-      const originalMethod = descriptor.value;
-      descriptor.value = function (...args: any[]) {
-        console.log("woo needs decorator", propertyKey);
-        const result = originalMethod.apply(this, args);
-        return result;
-      };
-
-      return descriptor;
+      ResourceBlock.addInputSchemaToMethod(propertyKey.toString(), schema);
     };
   }
 
@@ -50,15 +48,7 @@ export abstract class ResourceBlock {
       propertyKey: string | symbol,
       descriptor: PropertyDescriptor
     ) => {
-      target.addOutputSchemaToMethod(propertyKey.toString(), schema);
-      const originalMethod = descriptor.value;
-      descriptor.value = function (...args: any[]) {
-        console.log("woo provides decorator", propertyKey);
-        const result = originalMethod.apply(this, args);
-        return result;
-      };
-
-      return descriptor;
+      ResourceBlock.addOutputSchemaToMethod(propertyKey.toString(), schema);
     };
   }
 
