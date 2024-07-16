@@ -25,8 +25,8 @@ export abstract class Loader<LoaderConfig> {
    * than a string field for the flag. `getResource` serves to handle these cases
    *
    * @param segment - A path to a directory containing the resource
-   * @param path - A path relative to segment that points directly to the resource
-   * @returns The resource
+   * @param path - A path relative to `segment` that points directly to the resource
+   * @returns A string promise of the parsed resource
    */
   abstract getResource(segment: string, path: string): Promise<string>;
 }
