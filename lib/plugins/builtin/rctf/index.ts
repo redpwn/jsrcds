@@ -1,15 +1,20 @@
 import { z } from "zod";
-import { Plugin, ResourceBlockConfig } from "..";
+import { Plugin, ResourceBlock } from "../..";
 
 export class Rctf extends Plugin {
   public readonly name = "rctf";
-
-  public getChallengeConfigSchema() {
-    return {};
-  }
 }
 
-export class Challenge extends ResourceBlockConfig<any> {
+export class Challenge extends ResourceBlock {
   public key = "challenge";
   public schema = z.object({});
+
+  @Plugin.needs({
+    name: z.string(),
+    author: z.string(),
+    category: z.string(),
+    description: z.string(),
+    provides: z.array(z.string()),
+  })
+  public pushToScoreboard() {}
 }

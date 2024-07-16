@@ -5,8 +5,6 @@ export class Hydrator {
 
   registerDependency() {}
 
-  publish;
-
   constructor(plugins: Plugin<any>[]) {
     // plugins.forEach((plugin) => {
     //   plugin.getResourceBlocks().forEach((resourceBlock) => {
