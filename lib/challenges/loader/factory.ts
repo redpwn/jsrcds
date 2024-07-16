@@ -1,8 +1,9 @@
-import type { Loader, LoaderConfig } from ".";
+import type { LoaderConfig } from ".";
 import { ClassicFileLoader } from "./classic";
 import { ResourceFileLoader } from "./resource";
 
-export function generateLoader(loaderConfig: LoaderConfig): any { // running into some issues with getting it to return generics right now
+// fixme: fix return type
+export function createLoader(loaderConfig: LoaderConfig): any { 
 	if (loaderConfig.loaderType === "classic") return new ClassicFileLoader(loaderConfig);
 	else if (loaderConfig.loaderType === "resource") return new ResourceFileLoader(loaderConfig);
 	else 
