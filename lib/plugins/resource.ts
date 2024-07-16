@@ -19,11 +19,11 @@ export abstract class ResourceBlock {
 
   addInputSchemaToMethod(methodName: string, schema: Zod.ZodObject<any>) {
     this.maybeInitializeMethodRecord(methodName);
-    this.methods[methodName].inputSchema = schema;
+    this.methods[methodName]!.inputSchema = schema;
   }
   addOutputSchemaToMethod(methodName: string, schema: Zod.ZodObject<any>) {
     this.maybeInitializeMethodRecord(methodName);
-    this.methods[methodName].outputSchema = schema;
+    this.methods[methodName]!.outputSchema = schema;
   }
 
   static needs(schema: Zod.ZodObject<any>) {

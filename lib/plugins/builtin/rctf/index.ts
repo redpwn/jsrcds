@@ -4,6 +4,10 @@ import { ResourceBlock } from "../../resource";
 
 export class Rctf extends Plugin<any> {
   public readonly name = "rctf";
+
+  public override getResourceBlocks(): ResourceBlock[] {
+    return [new Challenge()];
+  }
 }
 
 export class Challenge extends ResourceBlock {
