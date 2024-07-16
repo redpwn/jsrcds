@@ -51,7 +51,7 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
           resourceList.push(new Resource(resource, resources[resource]));
         }
         return resourceList;
-      })
+      }),
     );
   }
 
@@ -61,7 +61,7 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
       path.join(this.config.repoRoot, segment, filePath),
-      "utf8"
+      "utf8",
     );
   }
 }

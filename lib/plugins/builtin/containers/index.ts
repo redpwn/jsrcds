@@ -44,7 +44,7 @@ import ContainerSchema from "./container";
 import { Plugin, ResourceBlockConfig } from "..";
 
 export default class ContainersPlugin extends Plugin {
-  public readonly name = "container"
+  public readonly name = "container";
 
   public getChallengeConfigSchema() {
     return {};

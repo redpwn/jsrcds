@@ -15,7 +15,7 @@ export class Challenge extends ResourceBlock {
       category: z.string(),
       description: z.string(),
       provides: z.array(z.string()),
-    })
+    }),
   )
   public pushToScoreboard() {}
 }

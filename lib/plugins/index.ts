@@ -5,7 +5,7 @@ export abstract class ResourceBlock {
     return (
       target: Object,
       propertyKey: string | symbol,
-      descriptor: PropertyDescriptor
+      descriptor: PropertyDescriptor,
     ) => {
       const originalMethod = descriptor.value;
       descriptor.value = function (...args: any[]) {

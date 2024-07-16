@@ -1,4 +1,4 @@
-import ExposeSchema from "./expose"
+import ExposeSchema from "./expose";
 
 // Object.fromEntries(
 //     Object.entries(config.expose ?? {}).map(([name, entries]: any) => [

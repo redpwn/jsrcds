@@ -7,7 +7,7 @@ const registry = new ChallengeRegistry(
   new ResourceFileLoader({
     repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
   }),
-  []
+  [],
 );
 
 await registry.loadChallenges();

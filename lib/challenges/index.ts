@@ -1,7 +1,7 @@
 import type { Loader, LoaderConfig } from "./loader";
 
 export const getChallenges = async (
-  loader: Loader<LoaderConfig>
+  loader: Loader<LoaderConfig>,
 ): Promise<{
   challenges: any[];
   errors: any[];

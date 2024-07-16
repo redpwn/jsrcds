@@ -7,7 +7,7 @@ export class ChallengeRegistry {
 
   constructor(
     public loader: Loader<LoaderConfig>,
-    public plugins: Plugin<any>[]
+    public plugins: Plugin<any>[],
   ) {
     this.hydrator = new Hydrator(plugins);
   }

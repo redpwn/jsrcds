@@ -4,9 +4,9 @@ import { ResourceFileLoader } from "./resource";
 
 /**
  * Factory method for generating Loader based on loaderConfig type
- * 
+ *
  * @param loaderConfig - Config of type LoaderConfig that specifies how Loader should be generated
- * @returns Loader built from loaderConfig 
+ * @returns Loader built from loaderConfig
  */
 export function createLoader(loaderConfig: LoaderConfig): Loader<LoaderConfig> {
   if (loaderConfig.loaderType === "classic")

@@ -50,7 +50,7 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
         const schema = createChallengeConfigSchema(this, segment);
 
         return schema.parseAsync(config); // TODO: use safeParseAsync and handle errors properly
-      })
+      }),
     );
   }
 
@@ -60,7 +60,7 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
       path.join(this.config.repoRoot, segment, filePath),
-      "utf8"
+      "utf8",
     );
   }
 }

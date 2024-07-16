@@ -22,7 +22,7 @@ export class Resource {
       return definition.map((item) => this.findDependencies(item));
     } else if (definition instanceof Object) {
       return Object.keys(definition).map((key) =>
-        this.findDependencies(definition[key])
+        this.findDependencies(definition[key]),
       );
     } else {
       this.createPossibleDependency(definition);
@@ -35,5 +35,8 @@ export class Resource {
 }
 
 class Dependency {
-  constructor(public id: string, public name: string) {}
+  constructor(
+    public id: string,
+    public name: string,
+  ) {}
 }
