@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { Plugin, ResourceBlock } from "../..";
+import { Plugin } from "../../";
+import { ResourceBlock } from "../../resource";
 
-export class Rctf extends Plugin {
+export class Rctf extends Plugin<any> {
   public readonly name = "rctf";
 }
 
@@ -15,7 +16,12 @@ export class Challenge extends ResourceBlock {
       category: z.string(),
       description: z.string(),
       provides: z.array(z.string()),
-    }),
+    })
+  )
+  @ResourceBlock.provides(
+    z.object({
+      idk: z.string(),
+    })
   )
   public pushToScoreboard() {}
 }
