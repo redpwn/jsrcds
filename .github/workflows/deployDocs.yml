@@ -1,0 +1,35 @@
+name: Deploy TypeDoc docs to GitHub Pages
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Run docs script
+        run: |
+          pnpm install && pnpm run docs
+      - name: Upload artifacts
+        uses: actions/upload-artifacts@v4
+        id: upload-artifact
+        with: 
+          name: 'github-pages'
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
+  deploy:
+    needs: build
+    permissions: 
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
