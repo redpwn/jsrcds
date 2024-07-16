@@ -8,11 +8,29 @@ import fs from "fs";
 
 import { Loader } from "..";
 
+/**
+ * A config specifying how ClassicFileLoader should parse its challenge configs
+ */
 export interface ClassicFileLoaderConfig {
+  /**
+   * A path to the root directory containing all challenge configurations
+   */
   repoRoot: string;
 }
 
+/**
+ * Implementation of Loader interface for parsing YAML challenge configs
+ */
 export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
+  /**
+   * Validates YAML challenge configuration files and returns the parsed output
+   * 
+   * @returns An array promise, whose elements are objects
+   * representing the parsed challenge config
+   * 
+   * @throws ZodError
+   * Thrown if config file is invalid
+   */
   async getChallenges(): Promise<ChallengeConfig[]> {
     const challengeList = await glob("**/challenge.y?(a)ml", {
       cwd: this.config.repoRoot,
@@ -35,6 +53,16 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
     );
   }
 
+  /**
+   * Loads a specific resource specified in the config file and returns the output
+   * @remarks
+   * challenge.yml may contain an object holding the file path to the flag itself, rather 
+   * than a string field for the flag. `getResource` serves to handle these cases
+   * 
+   * @param segment - A path to a directory containing the resource
+   * @param path - A path relative to segment that points directly to the resource
+   * @returns The parsed resource
+   */
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
       path.join(this.config.repoRoot, segment, filePath),

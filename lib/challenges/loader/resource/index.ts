@@ -20,14 +20,14 @@ export interface ResourceFileLoaderConfig {
 }
 
 /**
- * Implementation of Loader interface for parsing challenge configs in .hcl format
+ * Implementation of Loader interface for parsing HCL challenge configs
  */
 export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   /**
-   * Parses .hcl challenge configuration files and returns the parsed output
+   * Parses HCL challenge configuration files and returns the parsed output
    * 
    * @returns An array promise, whose elements are an array of Resource objects 
-   * specifying the resource blocks in the config
+   * specifying the resource blocks in each config
    */
   async getChallenges(): Promise<any[]> {
     const challengeList = await glob("**/challenge.hcl", {
