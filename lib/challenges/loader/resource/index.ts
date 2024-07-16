@@ -7,12 +7,28 @@ import fs from "fs";
 
 import { Loader } from "..";
 import { Resource } from "./resource";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
+/**
+ * A config specifying how ResourceFileLoader should parse its challenge configs
+ */
 export interface ResourceFileLoaderConfig {
+  /**
+   * A path to the root directory containing all challenge configurations
+   */
   repoRoot: string;
 }
 
+/**
+ * Implementation of Loader interface for parsing challenge configs in .hcl format
+ */
 export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
+  /**
+   * Parses .hcl challenge configuration files and returns the parsed output
+   * 
+   * @returns An array promise, whose elements are an array of Resource objects 
+   * specifying the resource blocks in the config
+   */
   async getChallenges(): Promise<any[]> {
     const challengeList = await glob("**/challenge.hcl", {
       cwd: this.config.repoRoot,
@@ -38,6 +54,16 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
     );
   }
 
+  /**
+   * Loads a specific resource specified in the config file and returns the output
+   * @remarks
+   * challenge.hcl may contain an object holding the file path to the flag itself, rather 
+   * than a string field for the flag. `getResource` serves to handle these cases
+   * 
+   * @param segment - A path to a directory containing the resource
+   * @param path - A path relative to segment that points directly to the resource
+   * @returns The parsed resource
+   */
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
       path.join(this.config.repoRoot, segment, filePath),
