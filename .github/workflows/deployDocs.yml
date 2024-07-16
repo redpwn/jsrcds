@@ -13,6 +13,19 @@ jobs:
       - name: Run docs script
         run: |
           pnpm install && pnpm run docs
+      - name: Compress build into tar
+        run: |
+          echo ::group::Archive artifact
+          tar \
+            --dereference --hard-dereference \
+            --directory "$INPUT_PATH" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            .
+          echo ::endgroup::
+        env:
+          INPUT_PATH: "./docs"
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         id: upload-artifact
