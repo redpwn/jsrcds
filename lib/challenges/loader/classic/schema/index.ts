@@ -5,6 +5,13 @@ import path from "path";
 
 import type { Loader, LoaderConfig } from "../../../loader";
 
+/**
+ * Returns a zod schema to parse and validate YAML challenge configs
+ * 
+ * @param loader - A loader to load the flag resource with if only the path is defined
+ * @param segment - A path to the parent directory of the config
+ * @returns A zod schema defining the YAML challenge config
+ */
 export const createChallengeConfigSchema = (
   loader: Loader<LoaderConfig>,
   segment: string
