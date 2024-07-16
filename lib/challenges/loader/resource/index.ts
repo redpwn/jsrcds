@@ -21,13 +21,13 @@ export interface ResourceFileLoaderConfig {
 }
 
 /**
- * Implementation of Loader interface for parsing HCL challenge configs
+ * Implementation of {@link Loader} interface for parsing HCL challenge configs
  */
 export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   /**
    * Parses HCL challenge configuration files and returns the parsed output
    *
-   * @returns An array promise, whose elements are an array of Resource objects
+   * @returns An array promise, whose elements are an array of {@link Resource} objects
    * specifying the resource blocks in each config
    */
   async getChallenges(): Promise<any[]> {
@@ -55,8 +55,9 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
     );
   }
 
+  // FIXME: typedoc failing to find Loader.getResource for @inheritDoc but not for @link
   /**
-   * {@inheritDoc Loader.getResource)
+   * {@inheritDoc Loader.getResource}
    */
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(

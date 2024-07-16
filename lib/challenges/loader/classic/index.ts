@@ -55,7 +55,7 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   }
 
   /**
-   * {@inheritDoc Loader.getResource)
+   * {@inheritDoc Loader.getResource}
    */
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
