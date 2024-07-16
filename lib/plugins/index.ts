@@ -11,10 +11,20 @@ export abstract class Plugin<PluginConfig> {
 
   public abstract getResourceBlocks(): ResourceBlock[];
 
-  static needs(schema: Zod.Schema<any>) {
-    return (target: Function) => {
-      // do something with the schema
-      console.log(schema);
+  static needs(schema: Zod.ZodObject<any>) {
+    return function (
+      target: Object,
+      propertyKey: string | symbol,
+      descriptor: PropertyDescriptor
+    ) {
+      const originalMethod = descriptor.value;
+      descriptor.value = function (...args: any[]) {
+        console.log("woo decorator");
+        const result = originalMethod.apply(this, args);
+        return result;
+      };
+
+      return descriptor;
     };
   }
 

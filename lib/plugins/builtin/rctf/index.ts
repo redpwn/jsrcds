@@ -9,12 +9,14 @@ export class Challenge extends ResourceBlock {
   public key = "challenge";
   public schema = z.object({});
 
-  @Plugin.needs({
-    name: z.string(),
-    author: z.string(),
-    category: z.string(),
-    description: z.string(),
-    provides: z.array(z.string()),
-  })
+  @Plugin.needs(
+    z.object({
+      name: z.string(),
+      author: z.string(),
+      category: z.string(),
+      description: z.string(),
+      provides: z.array(z.string()),
+    })
+  )
   public pushToScoreboard() {}
 }
