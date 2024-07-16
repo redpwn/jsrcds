@@ -54,14 +54,7 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   }
 
   /**
-   * Loads a specific resource specified in the config file and returns the output
-   * @remarks
-   * challenge.yml may contain an object holding the file path to the flag itself, rather 
-   * than a string field for the flag. `getResource` serves to handle these cases
-   * 
-   * @param segment - A path to a directory containing the resource
-   * @param path - A path relative to segment that points directly to the resource
-   * @returns The parsed resource
+   * {@inheritDoc Loader.getResource)
    */
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
