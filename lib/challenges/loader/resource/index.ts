@@ -6,6 +6,7 @@ import { glob } from "glob";
 import fs from "fs";
 
 import { Loader } from "..";
+import { Resource } from "../../resources/resource";
 
 export interface ResourceFileLoaderConfig {
   repoRoot: string;
@@ -27,7 +28,12 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
         }
 
         const hclString = (await fs.promises.readFile(configPath)).toString();
-        return hcl.parse(configPath, hclString);
+        const resources = await hcl.parse(configPath, hclString);
+        const resourceList = [];
+        for (const resource in resources) {
+          resourceList.push(new Resource(resource, resources[resource]));
+        }
+        return resourceList;
       })
     );
   }

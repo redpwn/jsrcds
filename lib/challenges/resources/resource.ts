@@ -1,7 +1,11 @@
-class Resource {
+export class Resource {
   public dependencies: Dependency[] = [];
 
-  constructor(public id: string, public name: string) {}
+  identifyDependencies() {}
+
+  constructor(plugin: any, definition: Record<string, any>) {
+    console.log(plugin, definition);
+  }
 }
 
 class Dependency {

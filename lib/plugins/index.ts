@@ -1,10 +1,13 @@
-export abstract class ResourceBlockConfig<Schema> {
+export abstract class ResourceBlockConfig {
   public abstract key: string;
-  public abstract schema: Zod.Schema<Schema>;
+  public abstract schema: Zod.Schema<any>;
 }
 
-export abstract class Plugin {
+export abstract class Plugin<PluginConfig> {
   public abstract readonly name: string;
+  public config: PluginConfig;
 
-  public abstract getChallengeConfigSchema(): any;
+  constructor(config: PluginConfig) {
+    this.config = config;
+  }
 }

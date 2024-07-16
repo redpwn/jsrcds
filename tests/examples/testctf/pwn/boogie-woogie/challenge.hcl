@@ -2,24 +2,24 @@ challenge {
   name = "boogie-woogie"
   author = "pepsipu"
   description = "i've been watching too much jjk\n ${network.nc}"
+  provide = upload
 }
 
 upload {
     files = ["src/boogie-woogie.c", {
         name = "boogie-woogie"
-        content = container_file(containers.build, "/app/boogie-woogie")
+        content = containers_file(containers.build, "/app/boogie-woogie")
     }]
 }
 
-containers {
-    main {
-        build = "src"
-        ports = [5000]
-        replicas = 1
-    }
-    build {
-        build = "src/build"
-    }
+containers "main" {
+    build = "src"
+    ports = [5000]
+    replicas = 1
+}
+
+containers "build" {
+    build = "src/build"
 }
 
 network {
