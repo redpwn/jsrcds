@@ -1,12 +1,5 @@
 export abstract class ResourceBlock {
   public abstract key: string;
-}
-
-export abstract class Plugin<PluginConfig> {
-  public abstract readonly name: string;
-  public config: PluginConfig;
-
-  public abstract getResourceBlocks(): ResourceBlock[];
 
   static needs(schema: Zod.ZodObject<any>) {
     return (
@@ -24,6 +17,13 @@ export abstract class Plugin<PluginConfig> {
       return descriptor;
     };
   }
+}
+
+export abstract class Plugin<PluginConfig> {
+  public abstract readonly name: string;
+  public config: PluginConfig;
+
+  public abstract getResourceBlocks(): ResourceBlock[];
 
   constructor(config: PluginConfig) {
     this.config = config;

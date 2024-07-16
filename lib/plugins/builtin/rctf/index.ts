@@ -7,9 +7,8 @@ export class Rctf extends Plugin {
 
 export class Challenge extends ResourceBlock {
   public key = "challenge";
-  public schema = z.object({});
 
-  @Plugin.needs(
+  @ResourceBlock.needs(
     z.object({
       name: z.string(),
       author: z.string(),
