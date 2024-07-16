@@ -56,6 +56,7 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   }
 
   /**
+<<<<<<< HEAD
    * Loads a specific resource specified in the config file and returns the output
    * @remarks
    * challenge.hcl may contain an object holding the file path to the flag itself, rather
@@ -64,6 +65,9 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
    * @param segment - A path to a directory containing the resource
    * @param path - A path relative to segment that points directly to the resource
    * @returns The parsed resource
+=======
+   * {@inheritDoc Loader.getResource)
+>>>>>>> 30a4fc615eca75b86b011b5f2478960ffda1a00a
    */
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
