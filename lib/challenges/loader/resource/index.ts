@@ -6,7 +6,7 @@ import { glob } from "glob";
 import fs from "fs";
 
 import { Loader } from "..";
-import { Resource } from "../../resources/resource";
+import { Resource } from "./resource";
 
 export interface ResourceFileLoaderConfig {
   repoRoot: string;

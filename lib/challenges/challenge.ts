@@ -1,13 +1,15 @@
 import { Loader, type LoaderConfig } from "./loader";
 import { Plugin } from "../plugins";
+import { Hydrator } from "./hydrator";
 
 export class ChallengeRegistry {
-  private loader: Loader<LoaderConfig>;
-  private plugins: Plugin<any>[];
+  private hydrator: Hydrator;
 
-  constructor(loader: Loader<LoaderConfig>, plugins: Plugin<any>[]) {
-    this.loader = loader;
-    this.plugins = plugins;
+  constructor(
+    public loader: Loader<LoaderConfig>,
+    public plugins: Plugin<any>[]
+  ) {
+    this.hydrator = new Hydrator(plugins);
   }
 
   async loadChallenges() {
