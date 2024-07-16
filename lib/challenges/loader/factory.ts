@@ -2,7 +2,12 @@ import type { Loader, LoaderConfig } from ".";
 import { ClassicFileLoader } from "./classic";
 import { ResourceFileLoader } from "./resource";
 
-// fixme: fix return type
+/**
+ * Factory method for generating Loader based on loaderConfig type
+ * 
+ * @param loaderConfig - Config of type LoaderConfig that specifies how Loader should be generated
+ * @returns Loader built from loaderConfig 
+ */
 export function createLoader(loaderConfig: LoaderConfig): Loader<LoaderConfig> {
   if (loaderConfig.loaderType === "classic")
     return new ClassicFileLoader(loaderConfig);
