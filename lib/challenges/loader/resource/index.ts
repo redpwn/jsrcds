@@ -13,6 +13,7 @@ import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
  * A config specifying how ResourceFileLoader should parse its challenge configs
  */
 export interface ResourceFileLoaderConfig {
+  loaderType: "resource";
   /**
    * A path to the root directory containing all challenge configurations
    */
@@ -25,8 +26,8 @@ export interface ResourceFileLoaderConfig {
 export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   /**
    * Parses HCL challenge configuration files and returns the parsed output
-   * 
-   * @returns An array promise, whose elements are an array of Resource objects 
+   *
+   * @returns An array promise, whose elements are an array of Resource objects
    * specifying the resource blocks in each config
    */
   async getChallenges(): Promise<any[]> {
@@ -57,9 +58,9 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   /**
    * Loads a specific resource specified in the config file and returns the output
    * @remarks
-   * challenge.hcl may contain an object holding the file path to the flag itself, rather 
+   * challenge.hcl may contain an object holding the file path to the flag itself, rather
    * than a string field for the flag. `getResource` serves to handle these cases
-   * 
+   *
    * @param segment - A path to a directory containing the resource
    * @param path - A path relative to segment that points directly to the resource
    * @returns The parsed resource

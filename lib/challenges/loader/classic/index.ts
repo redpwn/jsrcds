@@ -12,6 +12,7 @@ import { Loader } from "..";
  * A config specifying how ClassicFileLoader should parse its challenge configs
  */
 export interface ClassicFileLoaderConfig {
+  loaderType: "classic";
   /**
    * A path to the root directory containing all challenge configurations
    */
@@ -24,10 +25,10 @@ export interface ClassicFileLoaderConfig {
 export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   /**
    * Validates YAML challenge configuration files and returns the parsed output
-   * 
+   *
    * @returns An array promise, whose elements are objects
    * representing the parsed challenge config
-   * 
+   *
    * @throws ZodError
    * Thrown if config file is invalid
    */
@@ -56,9 +57,9 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   /**
    * Loads a specific resource specified in the config file and returns the output
    * @remarks
-   * challenge.yml may contain an object holding the file path to the flag itself, rather 
+   * challenge.yml may contain an object holding the file path to the flag itself, rather
    * than a string field for the flag. `getResource` serves to handle these cases
-   * 
+   *
    * @param segment - A path to a directory containing the resource
    * @param path - A path relative to segment that points directly to the resource
    * @returns The parsed resource
