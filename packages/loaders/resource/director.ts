@@ -1,27 +1,23 @@
-import { ResourceBuilder } from "../../resources";
+import { ChallengeBuilder } from "@rcds/challenge";
 
-export class ResourceDirector {
-  private builder: ResourceBuilder = new ResourceBuilder();
+const dependencyRegex = /\${(.*?)}/g;
+export class ChallengeDirector {
+  private builder: ChallengeBuilder = new ChallengeBuilder();
 
   createPossibleDependency(definition: any): any {
     // if is of type string and contains the ${} syntax
-    if (typeof definition === "string" && definition.includes("${")) {
-      const regex = /\${(.*?)}/g;
-      const matches = definition.match(regex);
-      this.dependencies.push(
-        ...matches!.map((match) => {
-          return new Dependency(match);
-        })
-      );
-      return (dependency: any) => {};
+    if (typeof definition === "string") {
+      const matches = definition.match(dependencyRegex);
     }
     return definition;
   }
 
   findDependencies(definition: any): any {
     if (Array.isArray(definition)) {
+      // find dependencies in array
       return definition.map((item) => this.findDependencies(item));
     } else if (definition instanceof Object) {
+      // find dependencies in object
       return Object.fromEntries(
         Object.keys(definition).map((key) => [
           key,

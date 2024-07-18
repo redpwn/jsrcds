@@ -20,7 +20,8 @@
     "lib": ["es2022"],
     "paths": {
       "@rcds/loader": ["./lib/challenges/loader"],
-      "@rcds/plugin": ["./lib/plugins"]
+      "@rcds/plugin": ["./lib/plugins"],
+      "@rcds/challenge": ["./lib/challenges/challenge"]
     }
   },
   // Include the necessary files for your project
