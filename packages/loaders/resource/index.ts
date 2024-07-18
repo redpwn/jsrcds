@@ -1,17 +1,15 @@
 import hcl from "@cdktf/hcl2json";
 import path from "path";
 import { glob } from "glob";
-
 import fs from "fs";
 
-import { Loader } from "..";
 import { ResourceDirector } from "./director";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import { Loader, type LoaderConfig } from "@rcds/loader";
 
 /**
  * A config specifying how ResourceFileLoader should parse its challenge configs
  */
-export interface ResourceFileLoaderConfig {
+export interface ResourceFileLoaderConfig extends LoaderConfig {
   loaderType: "resource";
   /**
    * A path to the root directory containing all challenge configurations

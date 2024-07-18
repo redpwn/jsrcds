@@ -1,14 +1,14 @@
 import path from "path";
 import { glob } from "glob";
 import fs from "fs";
-import { Loader } from "@rcds/loader";
+import { Loader, type LoaderConfig } from "@rcds/loader";
 
 import { type ChallengeConfig, createChallengeConfigSchema } from "./schema";
 
 /**
  * A config specifying how ClassicFileLoader should parse its challenge configs
  */
-export interface ClassicFileLoaderConfig {
+export interface ClassicFileLoaderConfig extends LoaderConfig {
   loaderType: "classic";
   /**
    * A path to the root directory containing all challenge configurations

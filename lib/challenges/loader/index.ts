@@ -1,3 +1,8 @@
+// TODO: document
+export interface LoaderConfig {
+  loaderType: string;
+}
+
 /**
  * A loader which generates a list of ChallengeConfig, which can then be validated and hydrated
  *
@@ -6,8 +11,8 @@
  * @remarks
  * we may want this class to do other things in the future
  */
-export abstract class Loader<LoaderConfig> {
-  constructor(public config: LoaderConfig) {}
+export abstract class Loader<Config extends LoaderConfig> {
+  constructor(public config: Config) {}
 
   /**
    * Parses challenge configuration files and returns the parsed output
