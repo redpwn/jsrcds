@@ -1,18 +1,24 @@
-type AnyObject = Record<string, any> | any[];
+import { ResourceBuilder } from "../../resources";
 
-export class Resource {
-  public dependencies: Dependency[] = [];
+export class ResourceDirector {
+  private builder: ResourceBuilder = new ResourceBuilder();
 
   createPossibleDependency(definition: any): any {
     // if is of type string and contains the ${} syntax
     if (typeof definition === "string" && definition.includes("${")) {
       const regex = /\${(.*?)}/g;
       const matches = definition.match(regex);
+      this.dependencies.push(
+        ...matches!.map((match) => {
+          return new Dependency(match);
+        })
+      );
+      return (dependency: any) => {};
     }
     return definition;
   }
 
-  findDependencies(definition: AnyObject): any {
+  findDependencies(definition: any): any {
     if (Array.isArray(definition)) {
       return definition.map((item) => this.findDependencies(item));
     } else if (definition instanceof Object) {
@@ -27,11 +33,7 @@ export class Resource {
     }
   }
 
-  constructor(plugin: any, definition: Record<string, any>) {
+  constructor(resourceName: string, definition: Record<string, any>) {
     console.log(this.findDependencies(definition));
   }
-}
-
-class Dependency {
-  constructor(public id: string, public name: string) {}
 }

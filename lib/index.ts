@@ -1,6 +1,6 @@
 import path from "path";
 
-import { ChallengeRegistry } from "./challenges/challenge";
+import { ChallengeRegistry } from "./challenges/challenge/registry";
 import { Rctf } from "./plugins/builtin/rctf";
 
 const registry = new ChallengeRegistry(

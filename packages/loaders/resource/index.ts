@@ -5,7 +5,7 @@ import { glob } from "glob";
 import fs from "fs";
 
 import { Loader } from "..";
-import { Resource } from "./resource";
+import { ResourceDirector } from "./director";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 /**
@@ -47,7 +47,9 @@ export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
         const resources = await hcl.parse(configPath, hclString);
         const resourceList = [];
         for (const resource in resources) {
-          resourceList.push(new Resource(resource, resources[resource]));
+          resourceList.push(
+            new ResourceDirector(resource, resources[resource])
+          );
         }
         return resourceList;
       })
