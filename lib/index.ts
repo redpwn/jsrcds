@@ -9,7 +9,6 @@ class RcdsStack extends TerraformStack {
 
 const app = new App({
   outdir: "build",
-  hclOutput: true,
 });
 
 new RcdsStack(app, "rcds");
