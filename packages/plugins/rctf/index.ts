@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { Plugin } from "../../";
-import { ResourceBlock } from "../../resource";
+import { Plugin, ResourceBlock } from "@rcds/plugin";
 
 export class Rctf extends Plugin<null> {
   public readonly name = "rctf";

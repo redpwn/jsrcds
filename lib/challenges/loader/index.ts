@@ -1,6 +1,3 @@
-import type { ClassicFileLoaderConfig } from "./classic";
-import type { ResourceFileLoaderConfig } from "./resource";
-
 /**
  * A loader which generates a list of ChallengeConfig, which can then be validated and hydrated
  *
@@ -30,5 +27,3 @@ export abstract class Loader<LoaderConfig> {
    */
   abstract getResource(segment: string, path: string): Promise<string>;
 }
-
-export type LoaderConfig = ClassicFileLoaderConfig | ResourceFileLoaderConfig;

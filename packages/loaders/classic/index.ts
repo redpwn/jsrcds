@@ -1,12 +1,9 @@
 import path from "path";
 import { glob } from "glob";
-
-import { loadYaml } from "../../../util";
-import { type ChallengeConfig, createChallengeConfigSchema } from "./schema";
-
 import fs from "fs";
+import { Loader } from "@rcds/loader";
 
-import { Loader } from "..";
+import { type ChallengeConfig, createChallengeConfigSchema } from "./schema";
 
 /**
  * A config specifying how ClassicFileLoader should parse its challenge configs
@@ -40,7 +37,7 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
     return Promise.all(
       challengeList.map(async (globPath) => {
         const configPath = path.join(this.config.repoRoot, globPath);
-        const config = await loadYaml(configPath);
+        const config = this.getResource("", configPath);
 
         const segment = path.dirname(globPath).replaceAll(path.sep, "/");
         if (!/^[a-z0-9/-]+$/.test(segment)) {
@@ -50,7 +47,7 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
         const schema = createChallengeConfigSchema(this, segment);
 
         return schema.parseAsync(config); // TODO: use safeParseAsync and handle errors properly
-      }),
+      })
     );
   }
 
@@ -60,7 +57,7 @@ export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   async getResource(segment: string, filePath: string): Promise<string> {
     return fs.promises.readFile(
       path.join(this.config.repoRoot, segment, filePath),
-      "utf8",
+      "utf8"
     );
   }
 }
