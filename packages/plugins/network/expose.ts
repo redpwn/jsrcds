@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { domainSafeName } from "../../utils";
+import { domainSafeName } from "../../loaders/classic/schema/utils";
 
 const ExposeConfig = z
   .record(
@@ -18,7 +18,7 @@ const ExposeConfig = z
               .int()
               .optional()
               .describe(
-                "The external port number to expose, treating this port as raw TCP.",
+                "The external port number to expose, treating this port as raw TCP."
               ),
             http: z
               .union([
@@ -42,13 +42,13 @@ const ExposeConfig = z
                       .array(z.string())
                       .optional()
                       .describe(
-                        "List of ALPN protocols to negotiate for this expose. Defaults to http/1.1 only.",
+                        "List of ALPN protocols to negotiate for this expose. Defaults to http/1.1 only."
                       ),
                     entrypoint: z
                       .enum(["tcp", "https"])
                       .optional()
                       .describe(
-                        "Entrypoint to use for this expose. Defaults to the TCP entrypoint only. The entrypoint controls the externally listening port.",
+                        "Entrypoint to use for this expose. Defaults to the TCP entrypoint only. The entrypoint controls the externally listening port."
                       ),
                   })
                   .strict(),
@@ -59,25 +59,25 @@ const ExposeConfig = z
               .min(1)
               .optional()
               .describe(
-                "Content to expect when checking the health of this port. If not specified, the health check will only check if if the connection succeeds (for TCP) or if the server responds (for HTTP).",
+                "Content to expect when checking the health of this port. If not specified, the health check will only check if if the connection succeeds (for TCP) or if the server responds (for HTTP)."
               ),
             rateLimit: z
               .boolean()
               .default(false)
               .describe(
-                "Whether to apply an IP-based request rate limit to this expose. Supported for HTTP exposes only. Defaults to false.",
+                "Whether to apply an IP-based request rate limit to this expose. Supported for HTTP exposes only. Defaults to false."
               ),
           })
           .strict()
           .refine((data: any) => data.http || data.tcp || data.tls, {
             message: "Either http, tcp or tls must be provided",
-          }),
+          })
       )
-      .optional(),
+      .optional()
   )
   .optional()
   .describe(
-    "Ports on containers to expose to the Internet. Keys correspond to the key of the container that the rule is targeting.",
+    "Ports on containers to expose to the Internet. Keys correspond to the key of the container that the rule is targeting."
   );
 
 export default ExposeConfig;

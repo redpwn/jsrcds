@@ -1,13 +1,5 @@
-# jsrcds
+challenge configs define infrastructure, so we should use infrastructure-as-code to manage them i think
 
-deploying a challenge includes
+ctf runners and challenge authors shouldn't have to know terraform to deploy challenges tho
 
-- building containers and pushing them to a registry
-- uploading downloadables somewhere
-- pushing challenege data to scoreboard
-- send monitoring reports somewhere
-
-additionally, plugins may add extra steps to the deployment process, such as
-
-- registering containers as instanceable with klodd
-- registering challenges with adminbot
+rcds automatically manages challenge infra for you (yippie)

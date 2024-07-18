@@ -8,6 +8,7 @@ export class ChallengeDirector {
     // if is of type string and contains the ${} syntax
     if (typeof definition === "string") {
       const matches = definition.match(dependencyRegex);
+      // hey dependency builder, i want you to inject this dependency when you get the chance.
     }
     return definition;
   }
