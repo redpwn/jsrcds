@@ -13,6 +13,7 @@
     "commander": "^12.1.0",
     "constructs": "^10.3.0",
     "dependency-graph": "^1.0.0",
+    "dotenv": "^16.4.5",
     "glob": "^10.3.10",
     "got": "^14.0.0",
     "handlebars": "^4.7.8",

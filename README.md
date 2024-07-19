@@ -11,5 +11,7 @@ rcds automatically manages challenge infra for you (yippie)
 solution:
 
 - ctf runners can just run `rcds deploy`
-- challenge authors can write in a simple challenge format (which will synthesize terraform)
-- challenge config extenders can write typescript (and rcds will hook that up to terraform)
+- challenge authors can write in a simple typescript challenge format
+- challenge config extenders can write typescript to extend it
+
+we're so back

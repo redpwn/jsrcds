@@ -11,21 +11,12 @@ importers:
       '@cdktf/hcl2json':
         specifier: ^0.20.8
         version: 0.20.8
-      '@cdktf/provider-null':
-        specifier: ^10.0.0
-        version: 10.0.0(cdktf@0.20.8(constructs@10.3.0))(constructs@10.3.0)
-      '@cdktf/tf-module-stack':
-        specifier: ^5.0.21
-        version: 5.0.21(cdktf@0.20.8(constructs@10.3.0))(constructs@10.3.0)
       ajv:
         specifier: ^8.12.0
         version: 8.16.0
       cdktf:
         specifier: ^0.20.8
         version: 0.20.8(constructs@10.3.0)
-      cdktf-tf-module-stack:
-        specifier: ^0.2.0
-        version: 0.2.0(cdktf@0.20.8(constructs@10.3.0))(constructs@10.3.0)
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -35,6 +26,9 @@ importers:
       dependency-graph:
         specifier: ^1.0.0
         version: 1.0.0
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       glob:
         specifier: ^10.3.10
         version: 10.4.5
@@ -68,19 +62,6 @@ packages:
 
   '@cdktf/hcl2json@0.20.8':
     resolution: {integrity: sha512-MOt5HHZYmHiRleaS8YwhEz913H4xzDCOO6MF1GO5RNZ74DYl6Bv6Y+JY4196E0THtiJ1Ibo9IvLfTIlTUrQ+Bw==}
-
-  '@cdktf/provider-null@10.0.0':
-    resolution: {integrity: sha512-r/2z3N4Z1ADjh4hu3BOyKRcXr0OE1f/b5kh+IdC2BF2dhHVaXGHw2Cvogd+R73PjgBNBv/pZa+wOY16tlgNpaQ==}
-    engines: {node: '>= 18.12.0'}
-    peerDependencies:
-      cdktf: ^0.20.0
-      constructs: ^10.3.0
-
-  '@cdktf/tf-module-stack@5.0.21':
-    resolution: {integrity: sha512-GVqwunDhl3SxvU+hY8Sz9tIC2cl1DcriRhv5ZjCdZEQFJdp4uQ5MJ0xEBybiAMO8ys+GxUjK/eEREXs4DexbKw==}
-    peerDependencies:
-      cdktf: '>=0.20.0'
-      constructs: ^10.0.25
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -152,13 +133,6 @@ packages:
     resolution: {integrity: sha512-Yo9wGIQUaAfIbk+qY0X4cDQgCosecfBe3V9NSyeY4qPC2SAkbCS4Xj79VP8WOzitpJUZKc/wsRCYF5ariDIwkg==}
     engines: {node: '>=18'}
 
-  cdktf-tf-module-stack@0.2.0:
-    resolution: {integrity: sha512-d5G4s6msyh3QZvrrMjpidqsovu6yprN2JQbaCXGMed88cL3W+D9/tA/E5e3nZonOmsoweYnHwWwGvygWtuloFQ==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-    peerDependencies:
-      cdktf: ^0.12.0
-      constructs: ^10.0.107
-
   cdktf@0.20.8:
     resolution: {integrity: sha512-O4O5h0b1E6scc/tqq9EUIQGDbPmdrCQpdkPdbDtUHHzhZGtmFpIMc5MgP1SgB+EzAutnG2oUDefjCqWMnhDe9A==}
     peerDependencies:
@@ -198,6 +172,10 @@ packages:
   dependency-graph@1.0.0:
     resolution: {integrity: sha512-cW3gggJ28HZ/LExwxP2B++aiKxhJXMSIt9K48FOXQkm+vuG5gyatXnLsONRJdzO/7VfjDIiaOOa/bs4l464Lwg==}
     engines: {node: '>=4'}
+
+  dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -481,16 +459,6 @@ snapshots:
     dependencies:
       fs-extra: 11.2.0
 
-  '@cdktf/provider-null@10.0.0(cdktf@0.20.8(constructs@10.3.0))(constructs@10.3.0)':
-    dependencies:
-      cdktf: 0.20.8(constructs@10.3.0)
-      constructs: 10.3.0
-
-  '@cdktf/tf-module-stack@5.0.21(cdktf@0.20.8(constructs@10.3.0))(constructs@10.3.0)':
-    dependencies:
-      cdktf: 0.20.8(constructs@10.3.0)
-      constructs: 10.3.0
-
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
@@ -564,11 +532,6 @@ snapshots:
       normalize-url: 8.0.1
       responselike: 3.0.0
 
-  cdktf-tf-module-stack@0.2.0(cdktf@0.20.8(constructs@10.3.0))(constructs@10.3.0):
-    dependencies:
-      cdktf: 0.20.8(constructs@10.3.0)
-      constructs: 10.3.0
-
   cdktf@0.20.8(constructs@10.3.0):
     dependencies:
       constructs: 10.3.0
@@ -596,6 +559,8 @@ snapshots:
   defer-to-connect@2.0.1: {}
 
   dependency-graph@1.0.0: {}
+
+  dotenv@16.4.5: {}
 
   eastasianwidth@0.2.0: {}
 

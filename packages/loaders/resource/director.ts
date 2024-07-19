@@ -1,9 +1,5 @@
-import { ChallengeBuilder } from "@rcds/challenge";
-
 const dependencyRegex = /\${(.*?)}/g;
 export class ChallengeDirector {
-  private builder: ChallengeBuilder = new ChallengeBuilder();
-
   createPossibleDependency(definition: any): any {
     // if is of type string and contains the ${} syntax
     if (typeof definition === "string") {
