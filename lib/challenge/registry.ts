@@ -1,4 +1,4 @@
-import { Loader, type LoaderConfig } from "../loader";
+import { Loader, type LoaderConfig } from "../../loader";
 import { Plugin } from "../../plugins";
 
 export class ChallengeRegistry {

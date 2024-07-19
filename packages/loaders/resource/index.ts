@@ -4,7 +4,7 @@ import { glob } from "glob";
 import fs from "fs";
 
 import { ChallengeDirector } from "./director";
-import { Loader, type LoaderConfig } from "@rcds/loader";
+import { Loader, type LoaderConfig } from "../../../lib/loader";
 
 /**
  * A config specifying how ResourceFileLoader should parse its challenge configs

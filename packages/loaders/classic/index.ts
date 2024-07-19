@@ -1,7 +1,7 @@
 import path from "path";
 import { glob } from "glob";
 import fs from "fs";
-import { Loader, type LoaderConfig } from "@rcds/loader";
+import { Loader, type LoaderConfig } from "../../../lib/loader";
 
 import { type ChallengeConfig, createChallengeConfigSchema } from "./schema";
 

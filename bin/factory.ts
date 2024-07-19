@@ -1,4 +1,4 @@
-import type { Loader, LoaderConfig } from "../lib/challenges/loader";
+import type { Loader, LoaderConfig } from "../lib/loader";
 
 import {
   ClassicFileLoader,
@@ -8,6 +8,10 @@ import {
   ResourceFileLoader,
   type ResourceFileLoaderConfig,
 } from "../packages/loaders/resource";
+import {
+  TSFileLoader,
+  type TSFileLoaderConfig,
+} from "../packages/loaders/tscfg";
 
 /**
  * Factory method for generating {@link Loader} based on loaderConfig type
@@ -20,6 +24,8 @@ export function createLoader(loaderConfig: LoaderConfig): Loader<LoaderConfig> {
     return new ClassicFileLoader(loaderConfig as ClassicFileLoaderConfig);
   else if (loaderConfig.loaderType === "resource")
     return new ResourceFileLoader(loaderConfig as ResourceFileLoaderConfig);
+  else if (loaderConfig.loaderType === "tscfg")
+    return new TSFileLoader(loaderConfig as TSFileLoaderConfig);
   else {
     throw new Error("LoaderFactory called with unknown loaderType");
   }

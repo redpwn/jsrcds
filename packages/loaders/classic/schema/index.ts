@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import path from "path";
 
-import type { Loader, LoaderConfig } from "@rcds/loader";
+import type { Loader, LoaderConfig } from "../../../../lib/loader";
 
 export const domainSafeName = z
   .string()
