@@ -1,5 +1,5 @@
-import { Plugin } from "..";
+import { Plugin } from "@rcds/plugin";
 
-export default class Adminbot extends Plugin {
-  public key = "adminbot";
+export default class Adminbot extends Plugin<any> {
+  public name = "adminbot";
 }

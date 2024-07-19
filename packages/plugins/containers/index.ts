@@ -1,4 +1,4 @@
-import ContainerSchema from "./container";
+// import ContainerSchema from "./container";
 // SCHEMA STUFF
 
 // Object.fromEntries(
@@ -41,17 +41,13 @@ import ContainerSchema from "./container";
 //     }
 //   }
 
-import { Plugin, ResourceBlockConfig } from "..";
+import { Plugin } from "@rcds/plugin";
 
-export default class ContainersPlugin extends Plugin {
-  public readonly name = "container";
-
-  public getChallengeConfigSchema() {
-    return {};
-  }
+export default class ContainersPlugin extends Plugin<any> {
+  public name = "containers";
 }
 
-export class ContainersBlockConfig extends ResourceBlockConfig<any> {
-  public key = "containers";
-  public schema = ContainerSchema;
-}
+// export class ContainersBlockConfig extends ResourceBlockConfig<any> {
+//   public key = "containers";
+//   public schema = ContainerSchema;
+// }
