@@ -1,3 +1,5 @@
+YOU NEED PULUMI
+
 challenge configs define infrastructure, so we should use infrastructure-as-code to manage them i think
 
 problem:

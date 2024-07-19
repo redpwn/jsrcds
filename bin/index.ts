@@ -17,17 +17,24 @@
 
 // await registry.loadChallenges();
 
-import * as pulumi from "@pulumi/pulumi";
 import * as docker from "@pulumi/docker";
+import { Deployment } from "@rcds/deployment";
 
-// Find the latest Ubuntu precise image.
-const ubuntuRemoteImage = new docker.RemoteImage("ubuntu", {
-  name: "ubuntu:precise",
-});
-// Start a container
-const ubuntu = new docker.Container("ubuntu", {
-  name: "foo",
-  image: ubuntuRemoteImage.imageId,
-});
+const prog = async () => {
+  // Find the latest Ubuntu precise image.
+  const ubuntuRemoteImage = new docker.RemoteImage("ubuntu", {
+    name: "ubuntu:precise",
+  });
+  // Start a container
+  const ubuntu = new docker.Container("ubuntu", {
+    name: "foo",
+    image: ubuntuRemoteImage.imageId,
+  });
 
-import { InlineProgramArgs, LocalWorkspace } from "@pulumi/pulumi/automation";
+  return {
+    containerId: ubuntu.id,
+  };
+};
+
+const stack = await Deployment.createStack(prog);
+await stack.up({ onOutput: console.info });

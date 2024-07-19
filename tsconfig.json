@@ -23,7 +23,8 @@
       "@rcds/config": ["./lib/config"],
       "@rcds/loader": ["./lib/loader"],
       "@rcds/plugin": ["./lib/plugins"],
-      "@rcds/package": ["./lib/package"]
+      "@rcds/package": ["./lib/package"],
+      "@rcds/deployment": ["./lib/deployment"]
     }
   },
   // Include the necessary files for your project
