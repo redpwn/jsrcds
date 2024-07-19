@@ -19,7 +19,7 @@ export interface ClassicFileLoaderConfig extends LoaderConfig {
 /**
  * Implementation of Loader interface for parsing YAML challenge configs
  */
-export class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
+export default class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
   /**
    * Validates YAML challenge configuration files and returns the parsed output
    *

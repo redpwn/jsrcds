@@ -1,4 +1,7 @@
+import { PackageManager } from "@rcds/package";
+
 export { ChallengeRegistry } from "./registry";
-export { Challenge } from "./challenge";
+
+console.log(PackageManager.getPackageManager().plugins);
 
 export default {};

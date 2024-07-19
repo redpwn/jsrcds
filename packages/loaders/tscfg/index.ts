@@ -9,7 +9,7 @@ export interface TSFileLoaderConfig extends LoaderConfig {
   repoRoot: string;
 }
 
-export class TSFileLoader extends Loader<TSFileLoaderConfig> {
+export default class TSFileLoader extends Loader<TSFileLoaderConfig> {
   async getChallenges(): Promise<any[]> {
     const challengeList = await glob("**/challenge.config.ts", {
       cwd: this.config.repoRoot,

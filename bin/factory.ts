@@ -1,15 +1,12 @@
 import type { Loader, LoaderConfig } from "../lib/loader";
 
-import {
-  ClassicFileLoader,
+import ClassicFileLoader, {
   type ClassicFileLoaderConfig,
 } from "../packages/loaders/classic";
-import {
-  ResourceFileLoader,
+import ResourceFileLoader, {
   type ResourceFileLoaderConfig,
 } from "../packages/loaders/resource";
-import {
-  TSFileLoader,
+import TSFileLoader, {
   type TSFileLoaderConfig,
 } from "../packages/loaders/tscfg";
 

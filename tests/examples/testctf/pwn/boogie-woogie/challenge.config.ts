@@ -1,4 +1,4 @@
-import r from "@rcds/challenge";
+import r from "@rcds/tscfg";
 
 const deploy = r.container({ path: "src", ports: [5000], replicas: 1 });
 const build = r.container({ path: "src/build" });

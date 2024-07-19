@@ -20,7 +20,7 @@ export interface ResourceFileLoaderConfig extends LoaderConfig {
 /**
  * Implementation of {@link Loader} interface for parsing HCL challenge configs
  */
-export class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
+export default class ResourceFileLoader extends Loader<ResourceFileLoaderConfig> {
   /**
    * Parses HCL challenge configuration files and returns the parsed output
    *

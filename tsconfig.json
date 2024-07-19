@@ -19,9 +19,11 @@
     "noEmit": true,
     "lib": ["es2022"],
     "paths": {
+      "@rcds/challenge": ["./lib/challenge"],
+      "@rcds/config": ["./lib/config"],
       "@rcds/loader": ["./lib/loader"],
       "@rcds/plugin": ["./lib/plugins"],
-      "@rcds/challenge": ["./lib/challenge"]
+      "@rcds/package": ["./lib/package"]
     }
   },
   // Include the necessary files for your project
