@@ -3,7 +3,7 @@
     // Base Options recommended for all projects
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "es2022",
+    "target": "esnext",
     "experimentalDecorators": true,
     "allowJs": true,
     "resolveJsonModule": true,
@@ -17,7 +17,7 @@
     // We are not transpiling, so preserve our source code and do not emit files
     "module": "preserve",
     "noEmit": true,
-    "lib": ["es2022"],
+    "lib": ["esnext"],
     "paths": {
       "@rcds/challenge": ["./lib/challenge"],
       "@rcds/config": ["./lib/config"],

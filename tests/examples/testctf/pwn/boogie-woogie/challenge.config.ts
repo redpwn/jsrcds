@@ -1,7 +1,7 @@
-import r from "@rcds/deploy";
+import r from "@rcds/challenge";
 
-const deploy = r.container({ path: "src", ports: [5000], replicas: 1 });
-const build = r.container({ path: "src/build" });
+const deploy = r.image({ path: "src", ports: [5000], replicas: 1 });
+const build = r.image({ path: "src/build" });
 
 const network = r.network({
   target: 5000,
