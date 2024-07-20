@@ -1,19 +1,13 @@
 import path from "path";
 
-import { ChallengeRegistry } from "../lib/challenge/registry";
-import { Rctf } from "../packages/plugins/rctf";
-import { createLoader } from "./factory";
 import { LoaderFactory } from "@rcds/loader";
 
-const registry = new ChallengeRegistry(
-  new LoaderFactory({
-    loaderType: "TSFileLoader",
-    repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
-  }),
-  [new Rctf(null)]
-);
+const loader = new LoaderFactory({
+  loaderType: "TSFileLoader",
+  repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
+});
 
-await registry.loadChallenges();
+await loader.getChallenges();
 
 // import * as docker from "@pulumi/docker";
 // import { Deployment } from "@rcds/deployment";

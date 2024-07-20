@@ -4,8 +4,8 @@ import { LOADERS } from "@rcds/packages";
 // type y = (typeof LOADERS)[0];
 // type x<T> = typeof T extends Loader<infer U> ? U : never;
 // type z = x<typeof TSFileLoader | Loader<LoaderConfig<"meow2">>>;
-// TODO: fix ts types
 
+// TODO: fix ts types for loader factory
 export class LoaderFactory extends Loader<LoaderConfig> {
   private loader: Loader<LoaderConfig>;
 
