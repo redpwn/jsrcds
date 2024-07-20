@@ -1,19 +1,24 @@
-import { PackageManager } from "@rcds/package";
 import { Loader, type LoaderConfig } from ".";
+import { LOADERS } from "@rcds/packages";
 
-const loaders = await PackageManager.getPackageManager().getLoaders();
+// type y = (typeof LOADERS)[0];
+// type x<T> = typeof T extends Loader<infer U> ? U : never;
+// type z = x<typeof TSFileLoader | Loader<LoaderConfig<"meow2">>>;
+// TODO: fix ts types
 
-class LoaderFactory extends Loader<LoaderConfig> {
+export class LoaderFactory extends Loader<LoaderConfig> {
   private loader: Loader<LoaderConfig>;
 
   constructor(config: LoaderConfig) {
     super(config);
 
-    const loader = loaders.find((loader) => );
-    if (!loader) {
+    const SelectedLoader = LOADERS.find(
+      (loader) => loader.name === config.loaderType
+    );
+    if (!SelectedLoader) {
       throw new Error(`Loader of type "${config.loaderType}" not found`);
     }
-    this.loader = loader;
+    this.loader = new SelectedLoader(config as any);
   }
 
   public getChallenges(): Promise<any[]> {

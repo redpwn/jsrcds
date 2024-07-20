@@ -8,8 +8,7 @@ import { type ChallengeConfig, createChallengeConfigSchema } from "./schema";
 /**
  * A config specifying how ClassicFileLoader should parse its challenge configs
  */
-interface ClassicFileLoaderConfig extends LoaderConfig {
-  loaderType: "classic";
+interface ClassicFileLoaderConfig extends LoaderConfig<"classic"> {
   /**
    * A path to the root directory containing all challenge configurations
    */
@@ -20,6 +19,7 @@ interface ClassicFileLoaderConfig extends LoaderConfig {
  * Implementation of Loader interface for parsing YAML challenge configs
  */
 export default class ClassicFileLoader extends Loader<ClassicFileLoaderConfig> {
+  public readonly key = "classic";
   /**
    * Validates YAML challenge configuration files and returns the parsed output
    *

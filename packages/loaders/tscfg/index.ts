@@ -4,8 +4,7 @@ import fs from "fs";
 
 import { Loader, type LoaderConfig } from "../../../lib/loader";
 import { tsImport } from "tsx/esm/api";
-interface TSFileLoaderConfig extends LoaderConfig {
-  loaderType: "tscfg";
+interface TSFileLoaderConfig extends LoaderConfig<"tscfg"> {
   repoRoot: string;
 }
 

@@ -3,10 +3,11 @@ import path from "path";
 import { ChallengeRegistry } from "../lib/challenge/registry";
 import { Rctf } from "../packages/plugins/rctf";
 import { createLoader } from "./factory";
+import { LoaderFactory } from "@rcds/loader";
 
 const registry = new ChallengeRegistry(
-  createLoader({
-    loaderType: "tscfg",
+  new LoaderFactory({
+    loaderType: "TSFileLoader",
     repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
   }),
   [new Rctf(null)]
