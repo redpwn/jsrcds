@@ -3,15 +3,15 @@ import { glob } from "glob";
 import fs from "fs";
 
 import { Loader, type LoaderConfig } from "../../../lib/loader";
-
-export interface TSFileLoaderConfig extends LoaderConfig {
+import { tsImport } from "tsx/esm/api";
+interface TSFileLoaderConfig extends LoaderConfig {
   loaderType: "tscfg";
   repoRoot: string;
 }
 
 export default class TSFileLoader extends Loader<TSFileLoaderConfig> {
   async getChallenges(): Promise<any[]> {
-    const challengeList = await glob("**/challenge.config.ts", {
+    const challengeList = await glob("**/challenge.config.?(m)ts", {
       cwd: this.config.repoRoot,
     });
 
@@ -25,7 +25,7 @@ export default class TSFileLoader extends Loader<TSFileLoaderConfig> {
         }
 
         console.log(configPath);
-        const tsFile = require(configPath);
+        const tsFile = await tsImport(configPath, import.meta.url);
         console.log(tsFile);
       })
     );

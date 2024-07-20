@@ -26,3 +26,5 @@ r.challenge({
   description: `i've been watching too much jjk\n ${network.nc}`,
   provides: fileUrls,
 });
+
+export default r;

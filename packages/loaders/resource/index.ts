@@ -9,7 +9,7 @@ import { Loader, type LoaderConfig } from "../../../lib/loader";
 /**
  * A config specifying how ResourceFileLoader should parse its challenge configs
  */
-export interface ResourceFileLoaderConfig extends LoaderConfig {
+interface ResourceFileLoaderConfig extends LoaderConfig {
   loaderType: "resource";
   /**
    * A path to the root directory containing all challenge configurations

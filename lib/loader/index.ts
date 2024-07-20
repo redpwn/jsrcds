@@ -1,6 +1,7 @@
 // TODO: document
 export interface LoaderConfig {
   loaderType: string;
+  [key: string]: any;
 }
 
 /**

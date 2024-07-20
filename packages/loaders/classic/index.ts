@@ -8,7 +8,7 @@ import { type ChallengeConfig, createChallengeConfigSchema } from "./schema";
 /**
  * A config specifying how ClassicFileLoader should parse its challenge configs
  */
-export interface ClassicFileLoaderConfig extends LoaderConfig {
+interface ClassicFileLoaderConfig extends LoaderConfig {
   loaderType: "classic";
   /**
    * A path to the root directory containing all challenge configurations

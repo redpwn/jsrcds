@@ -1,9 +1,12 @@
-import { Loader } from "@rcds/loader";
+import { Loader, type LoaderConfig } from "@rcds/loader";
 import { Plugin } from "@rcds/plugin";
 import config from "@rcds/config";
 
 import path from "path";
 import fs from "fs/promises";
+
+import { tsImport } from "tsx/esm/api";
+
 export class PackageManager {
   private static packageManager: PackageManager = new PackageManager(
     path.join(process.cwd(), config.packagePath)
@@ -11,12 +14,16 @@ export class PackageManager {
 
   constructor(public packagesPath: string) {}
 
-  async getLoaders(): Promise<Loader<any>[]> {
+  async getLoaders(): Promise<Loader<LoaderConfig>[]> {
     const loaderPath = path.join(this.packagesPath, "loaders");
+    const loaders = await fs.readdir(loaderPath);
 
     return Promise.all(
-      (await fs.readdir(loaderPath)).map(async (dir) => {
-        const loader = await import(path.join(loaderPath, dir));
+      loaders.map(async (dir) => {
+        const loader = await tsImport(
+          path.join(loaderPath, dir),
+          import.meta.url
+        );
         return loader;
       })
     );
@@ -24,10 +31,14 @@ export class PackageManager {
 
   async getPlugins() {
     const pluginsPath = path.join(this.packagesPath, "plugins");
+    const plugins = await fs.readdir(pluginsPath);
 
     // return Promise.all(
-    //   (await fs.readdir(pluginsPath)).map(async (dir) => {
-    //     const plugin = await import(path.join(pluginsPath, dir));
+    //   plugins.map(async (dir) => {
+    //     const plugin = await tsImport(
+    //       path.join(pluginsPath, dir),
+    //       import.meta.url
+    //     );
     //     return plugin;
     //   })
     // );
@@ -36,7 +47,7 @@ export class PackageManager {
         "/Users/pepsipu/Programming/jsrcds/packages/plugins/adminbot",
         "/Users/pepsipu/Programming/jsrcds/packages/plugins/containers",
       ].map(async (dir) => {
-        const plugin = await import(dir);
+        const plugin = await tsImport(dir, import.meta.url);
         return plugin;
       })
     );

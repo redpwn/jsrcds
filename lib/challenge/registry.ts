@@ -9,7 +9,7 @@ export class ChallengeRegistry {
 
   async loadChallenges() {
     const challenges = await this.loader.getChallenges();
-    // console.dir(challenges, { depth: null });
+    console.dir(challenges, { depth: null });
     this.constructChallenge(challenges);
   }
 

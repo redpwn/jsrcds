@@ -28,6 +28,6 @@
     }
   },
   // Include the necessary files for your project
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.mts"],
   "exclude": ["node_modules"]
 }
