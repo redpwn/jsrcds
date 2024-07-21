@@ -1,4 +1,5 @@
-import Adminbot from "./adminbot";
-import ContainersPlugin from "./containers";
+import Containers from "./containers";
 
-export const PLUGINS = [Adminbot, ContainersPlugin];
+export const model = {
+  image: Containers.buildImage,
+};

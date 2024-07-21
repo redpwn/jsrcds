@@ -42,9 +42,29 @@
 //   }
 
 import { Plugin } from "@rcds/plugin";
+import * as docker from "@pulumi/docker";
 
-export default class ContainersPlugin extends Plugin<any> {
+interface BuildImageConfig {
+  path: string;
+}
+
+export default class Containers extends Plugin<any> {
   public name = "containers";
+
+  public static buildImage(config: BuildImageConfig) {
+    const ubuntuRemoteImage = new docker.RemoteImage("ubuntu", {
+      name: "ubuntu:precise",
+    });
+
+    const ubuntu = new docker.Container("ubuntu", {
+      name: "foo",
+      image: ubuntuRemoteImage.imageId,
+    });
+
+    return {
+      containerId: ubuntu.id,
+    };
+  }
 }
 
 // export class ContainersBlockConfig extends ResourceBlockConfig<any> {

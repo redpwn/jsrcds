@@ -1,2 +1,4 @@
+import { model } from "./plugins";
 export { LOADERS } from "./loaders";
-export { PLUGINS } from "./plugins";
+
+export default model;
