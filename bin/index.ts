@@ -1,10 +1,14 @@
+import "reflect-metadata";
+
 import path from "path";
 
 import { createLoader } from "@rcds/loader";
 import { Deployment } from "@rcds/deployment";
+import { registerPackages } from "../lib/registrar";
 
-const loader = createLoader({
-  type: "TSFileLoader",
+await registerPackages();
+
+const loader = createLoader("TSFileLoader", {
   repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
 });
 

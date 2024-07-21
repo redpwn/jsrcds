@@ -1,11 +1,3 @@
-// TODO: document
-export type ExtractLoaderConfig<T> = T extends Loader<infer U> ? U : never;
-
-export interface LoaderConfig<T = string> {
-  type: T;
-  [key: string]: any;
-}
-
 /**
  * A loader which generates a list of ChallengeConfig, which can then be validated and hydrated
  *
@@ -14,14 +6,14 @@ export interface LoaderConfig<T = string> {
  * @remarks
  * we may want this class to do other things in the future
  */
-export abstract class Loader<T extends LoaderConfig> {
-  constructor(public config: T) {}
+export abstract class Loader<T> {
+  constructor(protected config: T) {}
 
   /**
    * Parses challenge configuration files and returns the parsed output
    * @returns An array promise, whose elements are the parsed challenge configuration files
    */
-  abstract getChallenges(): () => Promise<void[]>;
+  abstract getChallenges(): Promise<any>;
 
   /**
    * Loads a specific resource specified in the challenge config

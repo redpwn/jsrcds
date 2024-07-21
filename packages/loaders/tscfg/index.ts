@@ -1,18 +1,18 @@
-import path from "path";
-import { glob } from "glob";
-import fs from "fs";
+import { Loader } from "@rcds/loader";
+import { registry } from "tsyringe";
 
-import { Loader, type LoaderConfig } from "../../../lib/loader";
+import path from "path";
+import fs from "fs";
+import { glob } from "glob";
 import { tsImport } from "tsx/esm/api";
 
-import { Deployment } from "@rcds/deployment";
-
-interface TSFileLoaderConfig extends LoaderConfig<"tscfg"> {
+interface TSFileLoaderConfig {
   repoRoot: string;
 }
 
-export default class TSFileLoader extends Loader<TSFileLoaderConfig> {
-  async getChallenges(): () => Promise<void[]> {
+@registry([{ token: "TSFileLoader", useValue: TSFileLoader }])
+export class TSFileLoader extends Loader<TSFileLoaderConfig> {
+  async getChallenges() {
     const challengeList = await glob("**/challenge.config.?(m)ts", {
       cwd: this.config.repoRoot,
     });
@@ -27,10 +27,8 @@ export default class TSFileLoader extends Loader<TSFileLoaderConfig> {
             throw new Error(`invalid challenge segment name: ${segment}`);
           }
 
-          console.log(configPath);
-
+          console.log(`running ${configPath}`);
           const tsFile = await tsImport(configPath, import.meta.url);
-          console.log(`running ${configPath}: ${tsFile}`);
         })
       );
     return prog;

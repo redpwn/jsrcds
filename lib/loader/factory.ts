@@ -1,10 +1,11 @@
-import { type LoaderConfig } from ".";
-import { LOADERS } from "@rcds/packages";
+import { container } from "tsyringe";
+import { Loader } from "@rcds/loader";
 
-export const createLoader = <R extends LoaderConfig>(config: R) => {
-  const SelectedLoader = LOADERS.find((loader) => loader.name === config.type);
+export const createLoader = <C>(name: string, config: C) => {
+  const SelectedLoader = container.resolve<new (config: C) => Loader<C>>(name);
+  console.log(SelectedLoader);
   if (!SelectedLoader) {
-    throw new Error(`Loader of type "${config.type}" not found`);
+    throw new Error(`Loader of name "${name}" not found`);
   }
-  return new SelectedLoader(config as any); // TODO: fix this any
+  return new SelectedLoader(config);
 };
