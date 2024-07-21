@@ -1,1 +1,1 @@
-export { Plugin } from "./plugin";
+export { Plugin, Resource } from "./plugin";

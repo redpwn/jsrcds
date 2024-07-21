@@ -1,23 +1,16 @@
-import { ComponentResource, ComponentResourceOptions } from "@pulumi/pulumi";
+import {
+  ComponentResource,
+  type ComponentResourceOptions,
+} from "@pulumi/pulumi";
 
-export abstract class Plugin<PluginConfig> extends ComponentResource {
-  public config: PluginConfig;
+export abstract class Plugin {}
 
-  constructor(name: string, opts: ComponentResourceOptions) {
-    super("rcds:plugin:MyComponent", name, {}, opts);
-    this.config = config;
+export abstract class Resource extends ComponentResource {
+  constructor(
+    name: string,
+    challengeName: string,
+    opts: ComponentResourceOptions
+  ) {
+    super(`rcds:plugin:${name}`, `${name}:${challengeName}`, {}, opts);
   }
 }
-
-const plugin = (name: string) => {
-  return (target, context) => {
-    if (context.kind === "class") {
-      return class extends target {
-        fuel: number = 50;
-        isEmpty(): boolean {
-          return this.fuel == 0;
-        }
-      };
-    }
-  };
-};

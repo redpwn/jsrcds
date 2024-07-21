@@ -19,7 +19,6 @@
     "noEmit": true,
     "lib": ["esnext"],
     "paths": {
-      "@rcds/challenge": ["./lib/challenge"],
       "@rcds/config": ["./lib/config"],
       "@rcds/loader": ["./lib/loader"],
       "@rcds/plugin": ["./lib/plugins"],
