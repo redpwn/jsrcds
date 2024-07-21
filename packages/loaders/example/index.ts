@@ -1,9 +1,7 @@
 import { Loader } from "@rcds/loader";
-import { registry } from "tsyringe";
+import { registry } from "@rcds/registry";
 
-interface ExampleLoaderConfig {
-  repoRoot: string;
-}
+interface ExampleLoaderConfig {}
 
 @registry([{ token: "ExampleLoader", useValue: ExampleLoader }])
 export class ExampleLoader extends Loader<ExampleLoaderConfig> {

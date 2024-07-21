@@ -1,5 +1,5 @@
 import { Loader } from "@rcds/loader";
-import { registry } from "tsyringe";
+import { registry } from "@rcds/registry";
 
 import path from "path";
 import fs from "fs";
@@ -14,24 +14,17 @@ interface TSFileLoaderConfig {
 export class TSFileLoader extends Loader<TSFileLoaderConfig> {
   async getChallenges() {
     const challengeList = await glob("**/challenge.config.?(m)ts", {
+      absolute: true,
       cwd: this.config.repoRoot,
     });
 
-    const prog = async () =>
+    return async () =>
       Promise.all(
         challengeList.map(async (globPath) => {
-          const configPath = path.join(this.config.repoRoot, globPath);
-
-          const segment = path.dirname(globPath).replaceAll(path.sep, "/");
-          if (!/^[a-z0-9/-]+$/.test(segment)) {
-            throw new Error(`invalid challenge segment name: ${segment}`);
-          }
-
-          console.log(`running ${configPath}`);
-          const tsFile = await tsImport(configPath, import.meta.url);
+          console.log(`running ${globPath}`);
+          const tsFile = await tsImport(globPath, import.meta.url);
         })
       );
-    return prog;
   }
 
   // FIXME: typedoc failing to find Loader.getResource for @inheritDoc but not for @link

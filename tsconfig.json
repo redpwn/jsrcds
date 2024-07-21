@@ -22,6 +22,7 @@
       "@rcds/config": ["./lib/config"],
       "@rcds/loader": ["./lib/loader"],
       "@rcds/plugin": ["./lib/plugins"],
+      "@rcds/registry": ["./lib/registry"],
       "@rcds/packages": ["./packages"],
       "@rcds/deployment": ["./lib/deployment"]
     }

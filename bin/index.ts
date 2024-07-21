@@ -4,7 +4,7 @@ import path from "path";
 
 import { createLoader } from "@rcds/loader";
 import { Deployment } from "@rcds/deployment";
-import { registerPackages } from "../lib/registrar";
+import { registerPackages } from "@rcds/registry";
 
 await registerPackages();
 
