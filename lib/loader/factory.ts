@@ -1,9 +1,8 @@
-import { container } from "tsyringe";
 import { Loader } from "@rcds/loader";
+import { container } from "tsyringe";
 
-export const createLoader = <C>(name: string, config: C) => {
+export const createLoader = <C>(name: string, config: C): Loader<C> => {
   const SelectedLoader = container.resolve<new (config: C) => Loader<C>>(name);
-  console.log(SelectedLoader);
   if (!SelectedLoader) {
     throw new Error(`Loader of name "${name}" not found`);
   }

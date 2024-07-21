@@ -14,16 +14,4 @@ export abstract class Loader<T> {
    * @returns An array promise, whose elements are the parsed challenge configuration files
    */
   abstract getChallenges(): Promise<any>;
-
-  /**
-   * Loads a specific resource specified in the challenge config
-   * @remarks
-   * challenge.yml may contain an object holding the file path to the flag itself, rather
-   * than a string field for the flag. `getResource` serves to handle these cases
-   *
-   * @param segment - A path to a directory containing the resource
-   * @param path - A path relative to `segment` that points directly to the resource
-   * @returns A string promise of the parsed resource
-   */
-  abstract getResource(segment: string, path: string): Promise<string>;
 }
