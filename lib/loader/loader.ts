@@ -1,5 +1,5 @@
 /**
- * A loader which generates a list of ChallengeConfig, which can then be validated and hydrated
+ * A loader which generates a list of Challenges, which can then be validated and hydrated
  *
  * @typeParam LoaderConfig - Type of config that Loader should use when loading challenges
  *
@@ -13,5 +13,7 @@ export abstract class Loader<T> {
    * Parses challenge configuration files and returns the parsed output
    * @returns An array promise, whose elements are the parsed challenge configuration files
    */
-  abstract getChallenges(): Promise<any>;
+  abstract getChallenges(): Promise<Challenge[]>;
 }
+
+type Challenge = any;
