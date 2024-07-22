@@ -3,12 +3,13 @@ import { LocalWorkspace, Stack } from "@pulumi/pulumi/automation";
 export class Deployment {
   constructor() {}
 
-  static async createStack(program: any): Promise<Stack> {
+  // not fully sure if this is right approach
+  static async createStack(program: any, config?: any): Promise<Stack> {
     return await LocalWorkspace.createOrSelectStack(
       {
         program,
-        stackName: "dev",
-        projectName: "rcds",
+        stackName: config?.stackName ?? "dev",
+        projectName: config?.projectName ?? "rcds"
       },
       {
         projectSettings: {
