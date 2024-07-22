@@ -1,15 +1,20 @@
 import { LocalWorkspace, Stack } from "@pulumi/pulumi/automation";
 
+interface DeploymentConfig {
+  stackName?: string,
+  projectName?: string
+}
+
 export class Deployment {
-  constructor() {}
+  constructor(private config: DeploymentConfig) {}
 
   // not fully sure if this is right approach
-  static async createStack(program: any, config?: any): Promise<Stack> {
+  async createStack(program: any): Promise<Stack> {
     return await LocalWorkspace.createOrSelectStack(
       {
         program,
-        stackName: config?.stackName ?? "dev",
-        projectName: config?.projectName ?? "rcds"
+        stackName: this.config?.stackName ?? "dev",
+        projectName: this.config?.projectName ?? "rcds"
       },
       {
         projectSettings: {

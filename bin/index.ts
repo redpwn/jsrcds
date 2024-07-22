@@ -14,5 +14,6 @@ const loader = createLoader("TSFileLoader", {
 });
 
 const prog = await loader.getChallenges();
-const stack = await Deployment.createStack(prog, config);
+const deployment = new Deployment(config.deploymentConfig);
+const stack = await deployment.createStack(prog);
 await stack.up({ onOutput: console.info });
