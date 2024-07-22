@@ -33,9 +33,7 @@ import { injectable } from "@rcds/registry";
 export default class Containers extends Plugin {
   public name = "containers";
 
-  constructor();
-
   public static buildImage(config: BuildImageConfig) {
-    return new Image(config);
+    // return new Image(config);
   }
 }
