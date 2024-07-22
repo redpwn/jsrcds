@@ -2,19 +2,21 @@ import { Image } from "@pulumi/docker";
 import * as kx from "@pulumi/kubernetesx";
 
 const build = new Image("build", {
-  imageName: "ghcr.io/pepsipu/boogie-woogie-build",
+  imageName: "pepsipu/boogie-woogie-build",
   build: {
     platform: "linux/amd64",
     context: `${import.meta.dirname}/src/build`,
   },
+  skipPush: true,
 });
 
 const deploy = new Image("deploy", {
-  imageName: "ghcr.io/pepsipu/boogie-woogie-deploy",
+  imageName: "pepsipu/boogie-woogie-deploy",
   build: {
     platform: "linux/amd64",
     context: `${import.meta.dirname}/src`,
   },
+  skipPush: true,
 });
 
 const pb = new kx.PodBuilder({
@@ -27,7 +29,11 @@ const pb = new kx.PodBuilder({
 });
 
 const deployment = new kx.Deployment("boogie-woogie-deployment", {
-  spec: pb.asDeploymentSpec({ replicas: 3 }),
+  spec: pb.asDeploymentSpec({ replicas: 1 }),
+});
+
+const service = deployment.createService({
+  type: "NodePort",
 });
 
 // const network = r.network({
