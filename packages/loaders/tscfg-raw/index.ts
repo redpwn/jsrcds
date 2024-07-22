@@ -1,0 +1,43 @@
+import { Loader } from "@rcds/loader";
+import { registry } from "@rcds/registry";
+
+import path from "path";
+import fs from "fs";
+import { glob } from "glob";
+import { tsImport } from "tsx/esm/api";
+
+interface TSRawFileLoaderConfig {
+  repoRoot: string;
+}
+
+@registry([{ token: "TSRawFileLoader", useValue: TSRawFileLoader }])
+export class TSRawFileLoader extends Loader<TSRawFileLoaderConfig> {
+  async getChallenges() {
+    const challengeList = await glob("**/challenge.raw.config.?(m)ts", {
+      absolute: true,
+      cwd: this.config.repoRoot,
+    });
+
+    return async () =>
+      Promise.all(
+        challengeList.map(async (globPath) => {
+          console.log(`running ${globPath}`);
+          // change directories into the challenge directory
+          process.chdir(path.dirname(globPath));
+          console.log(`changed to ${process.cwd()}`);
+          const tsFile = await tsImport(globPath, import.meta.url);
+        })
+      );
+  }
+
+  // FIXME: typedoc failing to find Loader.getResource for @inheritDoc but not for @link
+  /**
+   * {@inheritDoc Loader.getResource}
+   */
+  async getResource(segment: string, filePath: string): Promise<string> {
+    return fs.promises.readFile(
+      path.join(this.config.repoRoot, segment, filePath),
+      "utf8"
+    );
+  }
+}

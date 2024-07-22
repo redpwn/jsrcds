@@ -9,7 +9,7 @@ import config from "@rcds/config";
 
 await registerPackages();
 
-const loader = createLoader("TSFileLoader", {
+const loader = createLoader("TSRawFileLoader", {
   repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
 });
 
