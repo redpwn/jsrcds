@@ -22,10 +22,7 @@ export class TSRawFileLoader extends Loader<TSRawFileLoaderConfig> {
       Promise.all(
         challengeList.map(async (globPath) => {
           console.log(`running ${globPath}`);
-          // change directories into the challenge directory
-          process.chdir(path.dirname(globPath));
-          console.log(`changed to ${process.cwd()}`);
-          // const tsFile = await tsImport(globPath, import.meta.url);
+          const tsFile = await import(globPath);
         })
       );
   }

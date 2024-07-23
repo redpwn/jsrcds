@@ -1,6 +1,7 @@
 {
   "name": "rcds-example-deployment",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@pulumi/docker": "^4.5.4",
     "@rcds/loader-tscfgr": "workspace:^",
     "path": "^0.12.7",
-    "rcds": "workspace:^"
+    "rcds": "workspace:^",
+    "reflect-metadata": "^0.2.2"
   }
 }

@@ -8,6 +8,9 @@ importers:
 
   bin:
     dependencies:
+      '@pulumi/docker':
+        specifier: ^4.5.4
+        version: 4.5.4(typescript@5.5.4)
       '@rcds/loader-tscfgr':
         specifier: workspace:^
         version: link:../packages/loaders/tscfgr
@@ -17,6 +20,9 @@ importers:
       rcds:
         specifier: workspace:^
         version: link:../lib
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
 
   lib:
     dependencies:
@@ -258,6 +264,9 @@ packages:
 
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
+
+  '@pulumi/docker@4.5.4':
+    resolution: {integrity: sha512-0R978Se7+NZIocYIoCAMC2q2sovar7O743zfnVQBSZRFLB+2pdZFqmpHWniM6rZtq/h5rwHsMfbJ/E6UJhihfw==}
 
   '@pulumi/pulumi@3.126.0':
     resolution: {integrity: sha512-NPYGHeavLh8Y2quOcx0KLMAM0WWES5RoJ9iywp953iL7hSqv1W77/GjvYuhj5jdm2O9Ty2AjYs74zpfeYzkOoQ==}
@@ -1002,6 +1011,10 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
+  semver@5.7.2:
+    resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
+    hasBin: true
+
   semver@7.6.3:
     resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
     engines: {node: '>=10'}
@@ -1480,6 +1493,16 @@ snapshots:
   '@protobufjs/pool@1.1.0': {}
 
   '@protobufjs/utf8@1.1.0': {}
+
+  '@pulumi/docker@4.5.4(typescript@5.5.4)':
+    dependencies:
+      '@pulumi/pulumi': 3.126.0(typescript@5.5.4)
+      semver: 5.7.2
+    transitivePeerDependencies:
+      - bluebird
+      - supports-color
+      - ts-node
+      - typescript
 
   '@pulumi/pulumi@3.126.0(typescript@5.5.4)':
     dependencies:
@@ -2268,6 +2291,8 @@ snapshots:
 
   safer-buffer@2.1.2:
     optional: true
+
+  semver@5.7.2: {}
 
   semver@7.6.3: {}
 
