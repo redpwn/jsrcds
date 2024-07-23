@@ -1,8 +1,8 @@
 {
-  "name": "rcds-example-deployment",
+  "name": "@rcds/loader-tscfgr",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rcds/loader-tscfgr": "workspace:^",
+    "fs": "0.0.1-security",
+    "glob": "^10.3.10",
     "path": "^0.12.7",
     "rcds": "workspace:^"
   }

@@ -2,11 +2,12 @@ import "reflect-metadata";
 
 import path from "path";
 
-import { createLoader } from "rcds/src/loader";
 import { Deployment } from "rcds/src/deployment";
 import config from "rcds/src/config";
 
-const loader = createLoader("TSRawFileLoader", {
+import { TSRawFileLoader } from "@rcds/loader-tscfgr";
+
+const loader = new TSRawFileLoader({
   repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
 });
 
