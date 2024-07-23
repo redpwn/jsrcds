@@ -2,12 +2,9 @@ import "reflect-metadata";
 
 import path from "path";
 
-import { createLoader } from "@rcds/loader";
-import { Deployment } from "@rcds/deployment";
-import { registerPackages } from "@rcds/registry";
-import config from "@rcds/config";
-
-await registerPackages();
+import { createLoader } from "rcds/src/loader";
+import { Deployment } from "rcds/src/deployment";
+import config from "rcds/src/config";
 
 const loader = createLoader("TSRawFileLoader", {
   repoRoot: path.join(process.cwd(), "tests/examples/testctf"),

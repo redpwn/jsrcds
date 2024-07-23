@@ -1,5 +1,5 @@
 {
-  "name": "bin",
+  "name": "rcds-example-deployment",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "path": "^0.12.7",
+    "rcds": "workspace:^"
+  }
 }

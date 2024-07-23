@@ -19,11 +19,11 @@
     "noEmit": true,
     "lib": ["esnext"],
     "paths": {
-      "@rcds/config": ["./config"],
-      "@rcds/loader": ["./loader"],
-      "@rcds/plugin": ["./plugin"],
-      "@rcds/registry": ["./registry"],
-      "@rcds/deployment": ["./deployment"]
+      "@rcds/config": ["./src/config"],
+      "@rcds/loader": ["./src/loader"],
+      "@rcds/plugin": ["./src/plugin"],
+      "@rcds/registry": ["./src/registry"],
+      "@rcds/deployment": ["./src/deployment"]
     }
   },
   // Include the necessary files for your project

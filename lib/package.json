@@ -12,7 +12,6 @@
     "glob": "^10.3.10",
     "path": "^0.12.7",
     "reflect-metadata": "^0.2.2",
-    "tsx": "^4.16.2",
     "tsyringe": "^4.8.0",
     "typescript": "^5.5.3",
     "yaml": "^2.4.5",

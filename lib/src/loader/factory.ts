@@ -1,5 +1,5 @@
-import { Loader } from "@rcds/loader";
-import { container } from "@rcds/registry";
+import { Loader } from ".";
+import { container } from "../registry";
 
 export const createLoader = <C>(name: string, config: C): Loader<C> => {
   const SelectedLoader = container.resolve<new (config: C) => Loader<C>>(name);
