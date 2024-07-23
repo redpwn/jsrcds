@@ -1,5 +1,2 @@
 packages:
-  - "packages/loaders/*"
-  - "packages/plugins/*"
-  - "packages/resources/*"
-  - "packages/providers/*"
+  - "packages/**"

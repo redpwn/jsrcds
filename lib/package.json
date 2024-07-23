@@ -7,16 +7,9 @@
     "docs": "npx typedoc"
   },
   "dependencies": {
-    "@pulumi/awsx": "^2.13.0",
-    "@pulumi/docker": "^4.5.4",
-    "@pulumi/eks": "^2.7.5",
-    "@pulumi/kubernetes": "^4.15.0",
-    "@pulumi/kubernetesx": "^0.1.6",
     "@pulumi/pulumi": "^3.125.0",
     "dotenv": "^16.4.5",
     "glob": "^10.3.10",
-    "got": "^14.0.0",
-    "handlebars": "^4.7.8",
     "path": "^0.12.7",
     "reflect-metadata": "^0.2.2",
     "tsx": "^4.16.2",
