@@ -1,5 +1,5 @@
 {
-  "name": "@rcds/loader-tscfgr",
+  "name": "@rcds/loader-tscfg",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",

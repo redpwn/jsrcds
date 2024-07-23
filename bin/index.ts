@@ -4,10 +4,9 @@ import path from "path";
 
 import { Deployment } from "rcds/src/deployment";
 import config from "rcds/src/config";
+import { TSFileLoader } from "@rcds/loader-tscfg";
 
-import { TSRawFileLoader } from "@rcds/loader-tscfgr";
-
-const loader = new TSRawFileLoader({
+const loader = new TSFileLoader({
   repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
 });
 

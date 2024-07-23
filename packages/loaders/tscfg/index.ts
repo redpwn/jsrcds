@@ -1,19 +1,19 @@
-import { Loader } from "@rcds/loader";
-import { registry } from "@rcds/registry";
+import { Loader } from "rcds/src/loader";
+import { registry } from "rcds/src/registry";
 
 import path from "path";
 import fs from "fs";
 import { glob } from "glob";
-import { tsImport } from "tsx/esm/api";
+// import { tsImport } from "tsx/esm/api";
 
 interface TSFileLoaderConfig {
   repoRoot: string;
 }
 
-@registry([{ token: "TSFileLoader", useValue: TSFileLoader }])
+// @registry([{ token: "TSRawFileLoader", useValue: TSRawFileLoader }])
 export class TSFileLoader extends Loader<TSFileLoaderConfig> {
   async getChallenges() {
-    const challengeList = await glob("**/challenge.config.?(m)ts", {
+    const challengeList = await glob("**/challenge.raw.config.?(m)ts", {
       absolute: true,
       cwd: this.config.repoRoot,
     });
@@ -22,7 +22,6 @@ export class TSFileLoader extends Loader<TSFileLoaderConfig> {
       Promise.all(
         challengeList.map(async (globPath) => {
           console.log(`running ${globPath}`);
-          const tsFile = await tsImport(globPath, import.meta.url);
         })
       );
   }

@@ -11,15 +11,18 @@ importers:
       '@pulumi/docker':
         specifier: ^4.5.4
         version: 4.5.4(typescript@5.5.4)
-      '@rcds/loader-tscfgr':
+      '@rcds/loader-tscfg':
         specifier: workspace:^
-        version: link:../packages/loaders/tscfgr
+        version: link:../packages/loaders/tscfg
       path:
         specifier: ^0.12.7
         version: 0.12.7
       rcds:
         specifier: workspace:^
         version: link:../lib
+      rcds-example-deployment:
+        specifier: 'link:'
+        version: 'link:'
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -61,7 +64,7 @@ importers:
         specifier: ^0.26.4
         version: 0.26.5(typescript@5.5.4)
 
-  packages/loaders/tscfgr:
+  packages/loaders/tscfg:
     dependencies:
       fs:
         specifier: 0.0.1-security
