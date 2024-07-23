@@ -19,15 +19,14 @@
     "noEmit": true,
     "lib": ["esnext"],
     "paths": {
-      "@rcds/config": ["./lib/config"],
-      "@rcds/loader": ["./lib/loader"],
-      "@rcds/plugin": ["./lib/plugin"],
-      "@rcds/registry": ["./lib/registry"],
-      "@rcds/packages": ["./packages"],
-      "@rcds/deployment": ["./lib/deployment"]
+      "@rcds/config": ["./config"],
+      "@rcds/loader": ["./loader"],
+      "@rcds/plugin": ["./plugin"],
+      "@rcds/registry": ["./registry"],
+      "@rcds/deployment": ["./deployment"]
     }
   },
   // Include the necessary files for your project
-  "include": ["**/*.ts", "**/*.mts"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

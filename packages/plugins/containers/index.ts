@@ -29,11 +29,21 @@ interface BuildImageConfig {
 //   }
 // }
 
-import { injectable } from "@rcds/registry";
+class ContainerRegistry {}
+
+type ContainerOptions = any;
+
+import { inject, registry } from "@rcds/registry";
+
+@registry([{ token: "Containers", useValue: Containers }])
 export default class Containers extends Plugin {
   public name = "containers";
 
-  public static buildImage(config: BuildImageConfig) {
-    // return new Image(config);
+  constructor(
+    @inject(ContainerRegistry) public registry: ContainerRegistry,
+    options: ContainerOptions
+  ) {
+    super();
+    // use container options to create a new image
   }
 }

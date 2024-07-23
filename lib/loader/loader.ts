@@ -13,7 +13,7 @@ export abstract class Loader<T> {
    * Parses challenge configuration files and returns the parsed output
    * @returns An array promise, whose elements are the parsed challenge configuration files
    */
-  abstract getChallenges(): Promise<Challenge[]>;
+  abstract getChallenges(): Promise<any>;
 }
 
 type Challenge = any;

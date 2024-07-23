@@ -1,7 +1,0 @@
-{
-    "entryPoints": ["lib"],
-    "out": "docs",
-	"entryPointStrategy": "expand",
-	// TODO: change back to false once typing issues are fixed
-	"skipErrorChecking": true
-}
