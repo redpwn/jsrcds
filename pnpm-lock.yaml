@@ -66,6 +66,9 @@ importers:
 
   packages/loaders/tscfg:
     dependencies:
+      '@types/node':
+        specifier: ^20.14.10
+        version: 20.14.12
       fs:
         specifier: 0.0.1-security
         version: 0.0.1-security
@@ -78,6 +81,9 @@ importers:
       rcds:
         specifier: workspace:^
         version: link:../../../lib
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.4
 
 packages:
 

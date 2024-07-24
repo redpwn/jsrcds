@@ -7,7 +7,8 @@ import config from "rcds/src/config";
 import { TSFileLoader } from "@rcds/loader-tscfg";
 
 const loader = new TSFileLoader({
-  repoRoot: path.join(process.cwd(), "tests/examples/testctf"),
+  repoRoot: path.join(process.cwd(), "tests/examples/"),
+  model: {},
 });
 
 const prog = await loader.getChallenges();

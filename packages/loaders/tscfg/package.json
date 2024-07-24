@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.14.10",
     "fs": "0.0.1-security",
     "glob": "^10.3.10",
     "path": "^0.12.7",
-    "rcds": "workspace:^"
+    "rcds": "workspace:^",
+    "typescript": "^5.5.3"
   }
 }

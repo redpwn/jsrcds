@@ -1,8 +1,8 @@
 import { LocalWorkspace, Stack } from "@pulumi/pulumi/automation";
 
 interface DeploymentConfig {
-  stackName?: string,
-  projectName?: string
+  stackName?: string;
+  projectName?: string;
 }
 
 export class Deployment {
@@ -14,18 +14,19 @@ export class Deployment {
       {
         program,
         stackName: this.config?.stackName ?? "dev",
-        projectName: this.config?.projectName ?? "rcds"
+        projectName: this.config?.projectName ?? "rcds",
       },
       {
         projectSettings: {
           name: "rcds",
           runtime: "nodejs",
-          backend: {
-            url: `file://${process.cwd()}`,
-          },
+          // backend: {
+          //   url: `file://${process.cwd()}`,
+          // },
         },
         envVars: {
           PULUMI_CONFIG_PASSPHRASE: "",
+          PULUMI_ACCESS_TOKEN: process.env.PULUMI_ACCESS_TOKEN,
         },
       }
     );
