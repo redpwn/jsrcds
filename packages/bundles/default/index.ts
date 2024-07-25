@@ -1,14 +1,19 @@
 import { Bundle } from "rcds/bundle";
 
-import { Loader } from "rcds/loader";
-import { Plugin } from "rcds/plugin";
-import { Provider } from "rcds/provider";
+import { TSFileLoader } from "@rcds/loader-tscfg";
 
-interface Config {}
+interface Config {
+  repoRoot: string;
+}
 
 export class DefaultBundle extends Bundle<Config, any, any, any> {
   async getLoaders() {
-    return [];
+    return [
+      new TSFileLoader({
+        repoRoot: this.config.repoRoot,
+        model: {},
+      }),
+    ];
   }
   async getPlugins() {
     return [];

@@ -2,19 +2,10 @@ import "reflect-metadata";
 
 import path from "path";
 
-import { Deployment } from "rcds/deployment";
-import config from "rcds/config";
-import { TSFileLoader } from "@rcds/loader-tscfg";
+import { DefaultBundle } from "@rcds/bundle-default";
 
-const loader = new TSFileLoader({
+const bundle = new DefaultBundle({
   repoRoot: path.join(process.cwd(), "tests/examples/"),
-  model: {},
 });
 
-const prog = await loader.getChallenges();
-if (!prog) {
-  throw new Error("No challenges found");
-}
-const deployment = new Deployment(config.deploymentConfig);
-const stack = await deployment.createStack(prog);
-await stack.up({ onOutput: console.info });
+await bundle.deployChallenges();

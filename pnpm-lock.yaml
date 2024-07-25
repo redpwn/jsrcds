@@ -11,6 +11,9 @@ importers:
       '@pulumi/docker':
         specifier: ^4.5.4
         version: 4.5.4(typescript@5.5.4)
+      '@rcds/bundle-default':
+        specifier: workspace:^
+        version: link:../packages/bundles/default
       '@rcds/loader-tscfg':
         specifier: workspace:^
         version: link:../packages/loaders/tscfg
@@ -66,6 +69,9 @@ importers:
 
   packages/bundles/default:
     dependencies:
+      '@rcds/loader-tscfg':
+        specifier: workspace:^
+        version: link:../../loaders/tscfg
       rcds:
         specifier: workspace:^
         version: link:../../../lib
