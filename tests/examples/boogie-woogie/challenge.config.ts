@@ -1,4 +1,4 @@
-import r from "@rcds/packages";
+import r from "rcds-model";
 
 const deploy = r.image({ path: "src" });
 const build = r.image({ path: "src/build" });

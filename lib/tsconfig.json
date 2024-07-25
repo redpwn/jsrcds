@@ -17,14 +17,7 @@
     // We are not transpiling, so preserve our source code and do not emit files
     "module": "preserve",
     "noEmit": true,
-    "lib": ["esnext"],
-    "paths": {
-      "@rcds/config": ["./src/config"],
-      "@rcds/loader": ["./src/loader"],
-      "@rcds/plugin": ["./src/plugin"],
-      "@rcds/registry": ["./src/registry"],
-      "@rcds/deployment": ["./src/deployment"]
-    }
+    "lib": ["esnext"]
   },
   // Include the necessary files for your project
   "include": ["**/*.ts"],

@@ -3,7 +3,9 @@ import {
   type ComponentResourceOptions,
 } from "@pulumi/pulumi";
 
-export abstract class Plugin {}
+export abstract class Plugin<T> {
+  constructor(protected config: T) {}
+}
 
 export abstract class Resource extends ComponentResource {
   constructor(

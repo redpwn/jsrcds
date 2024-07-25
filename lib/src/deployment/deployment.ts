@@ -1,4 +1,8 @@
-import { LocalWorkspace, Stack } from "@pulumi/pulumi/automation";
+import {
+  LocalWorkspace,
+  Stack,
+  type PulumiFn,
+} from "@pulumi/pulumi/automation";
 
 interface DeploymentConfig {
   stackName?: string;
@@ -9,7 +13,7 @@ export class Deployment {
   constructor(private config: DeploymentConfig) {}
 
   // not fully sure if this is right approach
-  async createStack(program: any): Promise<Stack> {
+  async createStack(program: PulumiFn): Promise<Stack> {
     return await LocalWorkspace.createOrSelectStack(
       {
         program,
@@ -20,13 +24,13 @@ export class Deployment {
         projectSettings: {
           name: "rcds",
           runtime: "nodejs",
-          // backend: {
-          //   url: `file://${process.cwd()}`,
-          // },
+          backend: {
+            url: `file://${process.cwd()}`,
+          },
         },
         envVars: {
           PULUMI_CONFIG_PASSPHRASE: "",
-          PULUMI_ACCESS_TOKEN: process.env.PULUMI_ACCESS_TOKEN,
+          PULUMI_ACCESS_TOKEN: process.env.PULUMI_ACCESS_TOKEN ?? "",
         },
       }
     );

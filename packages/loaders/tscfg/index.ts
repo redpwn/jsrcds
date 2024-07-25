@@ -1,12 +1,7 @@
-import { Loader } from "rcds/src/loader";
-import { registry } from "rcds/src/registry";
+import { Loader } from "rcds/loader";
 
-import path from "path";
-import fs from "fs/promises";
 import { glob } from "glob";
-import * as ts from "typescript";
 import { compile } from "./compile";
-// import { tsImport } from "tsx/esm/api";
 
 interface TSFileLoaderConfig {
   repoRoot: string;
@@ -25,7 +20,6 @@ export class TSFileLoader extends Loader<TSFileLoaderConfig> {
 
     const challengeFns = await Promise.all(
       challengeList.map(async (globPath) => {
-        const file = await fs.readFile(globPath, "utf8");
         const sourceFile = await compile(globPath);
         console.log("source file", sourceFile);
       })

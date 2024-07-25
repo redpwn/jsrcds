@@ -85,6 +85,12 @@ importers:
         specifier: ^5.5.3
         version: 5.5.4
 
+  packages/plugins/media:
+    dependencies:
+      rcds:
+        specifier: workspace:^
+        version: link:../../../lib
+
 packages:
 
   '@grpc/grpc-js@1.11.1':
