@@ -8,7 +8,8 @@
     "./deployment": "./src/deployment/index.ts",
     "./config": "./src/config/index.ts",
     "./loader": "./src/loader/index.ts",
-    "./bundle": "./src/bundle/index.ts"
+    "./bundle": "./src/bundle/index.ts",
+    "./provider": "./src/provider/index.ts"
   },
   "scripts": {
     "docs": "npx typedoc"
