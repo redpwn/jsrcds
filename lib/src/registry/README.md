@@ -1,1 +1,0 @@
-this re-exports tsyringe

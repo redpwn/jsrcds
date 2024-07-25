@@ -9,10 +9,11 @@ export abstract class Plugin<T> {
 
 export abstract class Resource extends ComponentResource {
   constructor(
+    pluginName: string,
     name: string,
     challengeName: string,
     opts: ComponentResourceOptions
   ) {
-    super(`rcds:plugin:${name}`, `${name}:${challengeName}`, {}, opts);
+    super(`rcds:${pluginName}:${name}`, `${name}:${challengeName}`, {}, opts);
   }
 }

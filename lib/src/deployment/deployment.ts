@@ -7,6 +7,7 @@ import {
 interface DeploymentConfig {
   stackName?: string;
   projectName?: string;
+  accessToken?: string;
 }
 
 export class Deployment {
@@ -30,7 +31,7 @@ export class Deployment {
         },
         envVars: {
           PULUMI_CONFIG_PASSPHRASE: "",
-          PULUMI_ACCESS_TOKEN: process.env.PULUMI_ACCESS_TOKEN ?? "",
+          PULUMI_ACCESS_TOKEN: this.config.accessToken ?? "",
         },
       }
     );
