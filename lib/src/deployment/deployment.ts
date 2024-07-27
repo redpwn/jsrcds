@@ -25,7 +25,7 @@ export class Deployment {
         projectSettings: {
           name: "rcds",
           runtime: "nodejs",
-          ...(this.config?.useLocalBackend && {
+          ...(this.config.useLocalBackend && {
             backend: {
               url: `file://${process.cwd()}`,
             }, 
