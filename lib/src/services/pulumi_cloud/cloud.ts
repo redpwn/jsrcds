@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
+import { type CloudStack } from './types';
 
 const PULUMI_CLOUD_ENDPOINT: string = "https://api.pulumi.com";
 const REQUIRED_HEADERS: any = {'Accept': "application/vnd.pulumi+8",
@@ -25,6 +26,20 @@ export class CloudClient {
       timeout: timeout,
       headers: {...REQUIRED_HEADERS, 'Authorization': `token ${authToken}`}
     })
+  }
+
+  /**
+   * Creates an empty stack in Pulumi Cloud with the given organization and project names
+   * 
+   * @param organizationName - Organization name to create stack on
+   * @param projectName - Project name to create stack on
+   * @param stackName - Name for the created stack
+   */
+  async createStack(organizationName: string, projectName: string, stackName: string) {
+    await this.axiosInstance.post(
+      `/api/stacks/${organizationName}/${projectName}`, 
+      { stackName: stackName }
+    );
   }
 
 }
