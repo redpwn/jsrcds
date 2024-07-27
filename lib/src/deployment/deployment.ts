@@ -8,7 +8,7 @@ interface DeploymentConfig {
   stackName?: string;
   projectName?: string;
   accessToken?: string;
-  useLocalBackend: boolean;
+  useLocalBackend?: boolean;
 }
 
 export class Deployment {
@@ -25,7 +25,7 @@ export class Deployment {
         projectSettings: {
           name: "rcds",
           runtime: "nodejs",
-          ...(this.config.useLocalBackend && {
+          ...(this.config?.useLocalBackend && {
             backend: {
               url: `file://${process.cwd()}`,
             }, 
