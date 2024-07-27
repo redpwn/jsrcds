@@ -8,12 +8,12 @@ interface DeploymentConfig {
   stackName?: string;
   projectName?: string;
   accessToken?: string;
+  useLocalBackend: boolean;
 }
 
 export class Deployment {
   constructor(private config: DeploymentConfig) {}
 
-  // not fully sure if this is right approach
   async createStack(program: PulumiFn): Promise<Stack> {
     return await LocalWorkspace.createOrSelectStack(
       {
@@ -25,9 +25,11 @@ export class Deployment {
         projectSettings: {
           name: "rcds",
           runtime: "nodejs",
-          backend: {
-            url: `file://${process.cwd()}`,
-          },
+          ...(this.config?.useLocalBackend && {
+            backend: {
+              url: `file://${process.cwd()}`,
+            }, 
+          }),
         },
         envVars: {
           PULUMI_CONFIG_PASSPHRASE: "",
