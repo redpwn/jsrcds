@@ -11,12 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@pulumi/docker": "^4.5.4",
-    "@rcds/bundle-default": "workspace:^",
-    "@rcds/loader-tscfg": "workspace:^",
-    "path": "^0.12.7",
     "rcds": "workspace:^",
-    "rcds-example-deployment": "link:",
-    "reflect-metadata": "^0.2.2"
+    "@rcds/bundle-default": "workspace:^",
+    "path": "^0.12.7"
   }
 }

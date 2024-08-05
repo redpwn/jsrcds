@@ -3,7 +3,7 @@ import { Bundle } from "rcds/bundle";
 import { TSLoader } from "@rcds/loader-tscfg";
 import { ClassicLoader } from "@rcds/loader-classic";
 
-import { LocalStorage } from "@rcds/plugin-fs";
+import { LocalStorage } from "@rcds/provider-local/fs";
 
 interface Config {
   repoRoot: string;

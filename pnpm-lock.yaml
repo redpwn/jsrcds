@@ -78,18 +78,18 @@ importers:
       '@rcds/loader-tscfg':
         specifier: workspace:^
         version: link:../../loaders/tscfg
-      '@rcds/plugin-fs':
+      '@rcds/provider-local':
         specifier: workspace:^
-        version: link:../../plugins/fs
+        version: link:../../providers/local
       rcds:
         specifier: workspace:^
         version: link:../../../lib
 
   packages/loaders/classic:
     dependencies:
-      '@rcds/plugin-fs':
+      '@rcds/resource-fs':
         specifier: workspace:^
-        version: link:../../plugins/fs
+        version: link:../../resources/fs
       glob:
         specifier: ^10.3.10
         version: 10.4.5
@@ -136,7 +136,30 @@ importers:
         specifier: workspace:^
         version: link:../../../lib
 
+  packages/providers/k8s:
+    dependencies:
+      '@rcds/resource-cluster':
+        specifier: workspace:^
+        version: link:../../resources/cluster
+
+  packages/providers/local:
+    dependencies:
+      '@rcds/resource-fs':
+        specifier: workspace:^
+        version: link:../../resources/fs
+      glob:
+        specifier: ^10.3.10
+        version: 10.4.5
+
   packages/resources/bucket: {}
+
+  packages/resources/cluster: {}
+
+  packages/resources/fs:
+    dependencies:
+      glob:
+        specifier: ^10.3.10
+        version: 10.4.5
 
 packages:
 

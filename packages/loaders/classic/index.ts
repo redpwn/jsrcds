@@ -1,9 +1,10 @@
 import { Loader } from "rcds/loader";
 import { parse } from "yaml";
 
-import { type FileStorage } from "@rcds/plugin-fs";
 import { createChallengeConfigSchema, type ChallengeConfig } from "./schema";
 import { Challenge } from "./challenge";
+
+import { type FileStorage } from "@rcds/resource-fs";
 
 interface ClassicLoaderConfig {}
 
@@ -22,7 +23,7 @@ export class ClassicLoader extends Loader<ClassicLoaderConfig> {
   }
 
   async getChallengeList(): Promise<string[]> {
-    return await this.fs.glob("**/challenge.y?(a)ml");
+    return this.fs.glob("**/challenge.y?(a)ml");
   }
 
   async getChallenges() {

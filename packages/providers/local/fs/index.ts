@@ -1,4 +1,4 @@
-import { type FileStorage } from "./storage";
+import { type FileStorage } from "@rcds/resource-fs";
 
 import path from "path";
 import { glob } from "glob";
