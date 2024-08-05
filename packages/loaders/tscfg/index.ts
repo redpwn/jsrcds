@@ -3,13 +3,13 @@ import { Loader } from "rcds/loader";
 import { glob } from "glob";
 import { compile } from "./compile";
 
-interface TSFileLoaderConfig {
+interface TSLoaderConfig {
   repoRoot: string;
   model: Record<string, any>;
 }
 
 // @registry([{ token: "TSRawFileLoader", useValue: TSRawFileLoader }])
-export class TSFileLoader extends Loader<TSFileLoaderConfig> {
+export class TSLoader extends Loader<TSLoaderConfig> {
   async getChallenges() {
     const challengeList = await glob("**/challenge.config.?(m)ts", {
       absolute: true,

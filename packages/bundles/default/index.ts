@@ -1,6 +1,9 @@
 import { Bundle } from "rcds/bundle";
 
-import { TSFileLoader } from "@rcds/loader-tscfg";
+import { TSLoader } from "@rcds/loader-tscfg";
+import { ClassicLoader } from "@rcds/loader-classic";
+
+import { LocalStorage } from "@rcds/plugin-fs";
 
 interface Config {
   repoRoot: string;
@@ -8,11 +11,14 @@ interface Config {
 
 export class DefaultBundle extends Bundle<Config, any, any, any> {
   async getLoaders() {
+    const storage = new LocalStorage(this.config.repoRoot);
+
     return [
-      new TSFileLoader({
+      new TSLoader({
         repoRoot: this.config.repoRoot,
         model: {},
       }),
+      new ClassicLoader(storage),
     ];
   }
   async getPlugins() {

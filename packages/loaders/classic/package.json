@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rcds/plugin-fs": "workspace:^",
     "glob": "^10.3.10",
-    "rcds": "workspace:^"
+    "rcds": "workspace:^",
+    "yaml": "^2.4.5",
+    "zod": "^3.23.8"
   }
 }

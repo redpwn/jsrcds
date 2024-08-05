@@ -1,5 +1,5 @@
 {
-  "name": "@rcds/bundle-default",
+  "name": "@rcds/plugin-fs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,9 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rcds/loader-classic": "workspace:^",
-    "@rcds/loader-tscfg": "workspace:^",
-    "@rcds/plugin-fs": "workspace:^",
-    "rcds": "workspace:^"
+    "glob": "^10.3.10"
   }
 }
