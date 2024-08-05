@@ -13,13 +13,7 @@ export class DefaultBundle extends Bundle<Config, any, any, any> {
   async getLoaders() {
     const storage = new LocalStorage(this.config.repoRoot);
 
-    return [
-      new TSLoader({
-        repoRoot: this.config.repoRoot,
-        model: {},
-      }),
-      new ClassicLoader(storage),
-    ];
+    return [new ClassicLoader({}, storage)];
   }
   async getPlugins() {
     return [];

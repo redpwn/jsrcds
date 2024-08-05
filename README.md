@@ -17,3 +17,10 @@ solution:
 - challenge config extenders can write typescript to extend it
 
 we're so back
+
+extensive challenge.yaml validation
+gh actions support
+direct gcs uploads
+gcp monitoring uptime check support
+klodd support
+adminbot support

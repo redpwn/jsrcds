@@ -20,6 +20,6 @@
     "lib": ["esnext"]
   },
   // Include the necessary files for your project
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "packages/loaders/classic/node_modules/template.ts"],
   "exclude": ["node_modules"]
 }

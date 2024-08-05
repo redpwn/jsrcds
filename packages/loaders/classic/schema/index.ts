@@ -1,28 +1,14 @@
 import { z } from "zod";
+import { domainSafeName } from "./utils";
+import { ProvideConfig } from "./provide";
+import { ContainerConfig } from "./containers";
+import ExposeConfig from "./expose";
 
-import path from "path";
-
-import type { Loader } from "rcds/loader";
-
-export const domainSafeName = z
-  .string()
-  .regex(/^[a-z0-9]([a-z0-9-]{0,48}[a-z0-9])?$/);
-
-/**
- * Returns a zod schema to parse and validate YAML challenge configs
- *
- * @param loader - A loader to load the flag resource with if only the path is defined
- * @param segment - A path to the parent directory of the config
- * @returns A zod schema defining the YAML challenge config
- */
-export const createChallengeConfigSchema = <T>(
-  loader: Loader<T>,
-  segment: string
-) =>
+export const createChallengeConfigSchema = () =>
   z
     .object({
       id: domainSafeName
-        .default(segment.toLowerCase().replaceAll("/", "-"))
+        .default("challenge") // TODO: gen challenge ID
         .describe(
           "Override the automatically generated id for this challenge. You should avoid setting this whenever possible."
         ),
@@ -40,7 +26,7 @@ export const createChallengeConfigSchema = <T>(
         ),
       category: z
         .string()
-        .default(path.posix.dirname(segment))
+        .default("category") // TODO: infer category
         .describe(
           "Category of the challenge. If not provided, defaults to the parent directory of the challenge (e.g. if this file is located at /pwn/chall1/challenge.yaml, the category will default to 'pwn')."
         ),
@@ -60,15 +46,14 @@ export const createChallengeConfigSchema = <T>(
       flag: z
         .union([
           z.string(),
-          z
-            .object({
-              file: z
-                .string()
-                .describe(
-                  "File to load the flag from. The file should contain one line with only the flag."
-                ),
-            })
-            .transform(async ({ file }) => loader.getResource(segment, file)),
+          z.object({
+            file: z
+              .string()
+              .describe(
+                "File to load the flag from. The file should contain one line with only the flag."
+              ),
+          }),
+          // .transform(async ({ file }) => loader.getResource(segment, file)),
         ])
         .describe("The flag for the challenge."),
       value: z
@@ -84,6 +69,7 @@ export const createChallengeConfigSchema = <T>(
               message: "min must be less than or equal to max",
             }),
         ])
+        .default(100) // TODO: infer value
         .describe(
           "The point value of the challenge. Static if set to an integer, dynamic if min and max are provided. Defaults to dynamic with competition min and max values."
         ),
@@ -99,10 +85,9 @@ export const createChallengeConfigSchema = <T>(
         .describe(
           "Whether or not this challenge's containers should be deployed. Default true."
         ),
-      plugins: z
-        .any()
-        .default([])
-        .describe("List of challenge plugins to use."),
+      provide: ProvideConfig,
+      containers: ContainerConfig,
+      expose: ExposeConfig,
     })
     .strict();
 

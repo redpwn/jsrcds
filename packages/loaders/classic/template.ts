@@ -21,7 +21,7 @@ interface DescriptionModel {
 
 const templateDescription = (
   challenge: ChallengeConfig,
-  description: string,
+  description: string
 ) => {
   const model: DescriptionModel = { challenge };
   if (challenge.expose) {
