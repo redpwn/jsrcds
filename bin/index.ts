@@ -1,7 +1,6 @@
 import "reflect-metadata";
 
 import path from "path";
-
 import { DefaultBundle } from "@rcds/bundle-default";
 
 const bundle = new DefaultBundle({

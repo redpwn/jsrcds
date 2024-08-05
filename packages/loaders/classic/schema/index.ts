@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import path from "path";
 
-import type { Loader, LoaderConfig } from "../../../../lib/loader";
+import type { Loader } from "rcds/loader";
 
 export const domainSafeName = z
   .string()
@@ -15,8 +15,8 @@ export const domainSafeName = z
  * @param segment - A path to the parent directory of the config
  * @returns A zod schema defining the YAML challenge config
  */
-export const createChallengeConfigSchema = (
-  loader: Loader<LoaderConfig>,
+export const createChallengeConfigSchema = <T>(
+  loader: Loader<T>,
   segment: string
 ) =>
   z

@@ -79,6 +79,15 @@ importers:
         specifier: workspace:^
         version: link:../../../lib
 
+  packages/loaders/classic:
+    dependencies:
+      glob:
+        specifier: ^10.3.10
+        version: 10.4.5
+      rcds:
+        specifier: workspace:^
+        version: link:../../../lib
+
   packages/loaders/tscfg:
     dependencies:
       '@types/node':
@@ -105,6 +114,8 @@ importers:
       rcds:
         specifier: workspace:^
         version: link:../../../lib
+
+  packages/resources/bucket: {}
 
 packages:
 
