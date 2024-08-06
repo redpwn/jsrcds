@@ -9,7 +9,8 @@
     "./config": "./src/config/index.ts",
     "./loader": "./src/loader/index.ts",
     "./bundle": "./src/bundle/index.ts",
-    "./provider": "./src/provider/index.ts"
+    "./provider": "./src/provider/index.ts",
+    "./registry": "./src/registry/index.ts"
   },
   "scripts": {
     "docs": "npx typedoc"

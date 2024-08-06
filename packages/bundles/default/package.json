@@ -12,6 +12,7 @@
   "dependencies": {
     "@rcds/loader-classic": "workspace:^",
     "@rcds/loader-tscfg": "workspace:^",
+    "@rcds/plugin-containers": "workspace:^",
     "@rcds/provider-local": "workspace:^",
     "rcds": "workspace:^"
   }

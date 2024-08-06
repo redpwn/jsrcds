@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@pulumi/docker": "^4.5.5"
+    "@pulumi/docker": "^4.5.5",
+    "@pulumi/docker-build": "^0.0.4"
   }
 }

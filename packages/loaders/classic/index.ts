@@ -1,11 +1,11 @@
 import { Loader } from "rcds/loader";
-import { parse } from "yaml";
-
-import { createChallengeConfigSchema, type ChallengeConfig } from "./schema";
-import { Challenge } from "./challenge";
 
 import { type FileStorage } from "@rcds/resource-fs";
 import { Containers } from "@rcds/plugin-containers";
+
+import { parse } from "yaml";
+
+import { createChallengeConfigSchema, type ChallengeConfig } from "./schema";
 
 interface ClassicLoaderConfig {}
 
@@ -16,15 +16,6 @@ export class ClassicLoader extends Loader<ClassicLoaderConfig> {
     private containers: Containers
   ) {
     super(config);
-  }
-
-  validateChallengeConfig(config: any): ChallengeConfig {
-    return createChallengeConfigSchema().parse(config);
-  }
-
-  async getChallengeConfig(path: string): Promise<any> {
-    const challengeYaml = await this.fs.readFile(path);
-    return parse(challengeYaml);
   }
 
   async getChallengeList(): Promise<string[]> {
@@ -41,24 +32,32 @@ export class ClassicLoader extends Loader<ClassicLoaderConfig> {
         const config = this.validateChallengeConfig(rawConfig);
 
         return () => {
-          Object.entries(config.containers).map(([name, containerConfig]) => {
-            const hash = this.containers.buildImage(
-              name,
-              containerConfig.build.dockerfile
-            );
-          });
+          Object.entries(config.containers).map(
+            async ([name, containerConfig]) => {
+              const hash = this.containers.buildImage(name, "newo");
+            }
+          );
 
-          this.runtime.deployChallenge({
-            name: config.id,
-          });
-          const urls = this.bucket.uploadFiles({
-            // ...
-          });
-          this.scoreboard.pushChallenge({
-            // ...
-          });
+          // this.runtime.deployChallenge({
+          //   name: config.id,
+          // });
+          // const urls = this.bucket.uploadFiles({
+          //   // ...
+          // });
+          // this.scoreboard.pushChallenge({
+          //   // ...
+          // });
         };
       })
     );
+  }
+
+  validateChallengeConfig(config: any): ChallengeConfig {
+    return createChallengeConfigSchema().parse(config);
+  }
+
+  async getChallengeConfig(path: string): Promise<any> {
+    const challengeYaml = await this.fs.readFile(path);
+    return parse(challengeYaml);
   }
 }

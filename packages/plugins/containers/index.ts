@@ -1,13 +1,13 @@
-import * as docker from "@pulumi/docker";
+import * as build from "@pulumi/docker-build";
 
 export class Containers {
   constructor() {}
 
   buildImage(challengeName: string, dockerfile: string) {
-    const container = new docker.Image(challengeName, {
-      imageName: `${challengeName}`,
-      build: {
-        dockerfile: dockerfile,
+    const container = new build.Image(challengeName, {
+      push: false,
+      dockerfile: {
+        inline: dockerfile,
       },
     });
   }

@@ -14,6 +14,7 @@
     "@rcds/resource-fs": "workspace:^",
     "glob": "^10.3.10",
     "rcds": "workspace:^",
+    "tsyringe": "^4.8.0",
     "yaml": "^2.4.5",
     "zod": "^3.23.8"
   }
