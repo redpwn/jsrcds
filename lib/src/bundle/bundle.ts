@@ -21,12 +21,13 @@ export abstract class Bundle<T, LoaderConfig, PluginConfig, ProviderConfig> {
       if (!prog) {
         throw new Error("No challenges found");
       }
+      console.log(prog);
       const deployment = new Deployment({
         projectName: "rcds",
         stackName: "dev",
         accessToken: process.env.PULUMI_ACCESS_TOKEN,
       });
-      const stack = await deployment.createStack(prog);
+      const stack = await deployment.createStack(prog[0]);
       await stack.up({ onOutput: console.info });
     }
   }

@@ -5,6 +5,7 @@
     "skipLibCheck": true,
     "target": "esnext",
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",

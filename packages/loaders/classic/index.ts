@@ -5,11 +5,16 @@ import { createChallengeConfigSchema, type ChallengeConfig } from "./schema";
 import { Challenge } from "./challenge";
 
 import { type FileStorage } from "@rcds/resource-fs";
+import { Containers } from "@rcds/plugin-containers";
 
 interface ClassicLoaderConfig {}
 
 export class ClassicLoader extends Loader<ClassicLoaderConfig> {
-  constructor(config: ClassicLoaderConfig, private fs: FileStorage) {
+  constructor(
+    config: ClassicLoaderConfig,
+    private fs: FileStorage,
+    private containers: Containers
+  ) {
     super(config);
   }
 
@@ -30,13 +35,29 @@ export class ClassicLoader extends Loader<ClassicLoaderConfig> {
     const challengeList = await this.getChallengeList();
     console.log("challenge list", challengeList);
 
-    const challengeFns = await Promise.all(
+    return await Promise.all(
       challengeList.map(async (globPath) => {
         const rawConfig = await this.getChallengeConfig(globPath);
         const config = this.validateChallengeConfig(rawConfig);
-        const challenge = new Challenge(config);
 
-        console.log("challenge", config);
+        return () => {
+          Object.entries(config.containers).map(([name, containerConfig]) => {
+            const hash = this.containers.buildImage(
+              name,
+              containerConfig.build.dockerfile
+            );
+          });
+
+          this.runtime.deployChallenge({
+            name: config.id,
+          });
+          const urls = this.bucket.uploadFiles({
+            // ...
+          });
+          this.scoreboard.pushChallenge({
+            // ...
+          });
+        };
       })
     );
   }

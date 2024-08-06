@@ -1,8 +1,7 @@
 {
-  "name": "k8s",
+  "name": "@rcds/plugin-containers",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@pulumi/kubernetes": "^4.15.0",
-    "@pulumi/pulumi": "^3.125.0",
-    "@rcds/resource-cluster": "workspace:^"
+    "@pulumi/docker": "^4.5.5"
   }
 }

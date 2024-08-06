@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { domainSafeName, cpuValue, memoryValue } from "./utils";
+import path from "path";
 
 export const ContainerConfig = z
   .record(
@@ -9,7 +10,7 @@ export const ContainerConfig = z
       .object({
         image: z
           .string()
-          .optional()
+          .default("")
           .describe(
             "The image tag for this container. If 'build' is not specified, the container will be pulled (e.g. containers for services like a database found on dockerhub). If 'build' is specified, this overrides the 'name' (default the name of the directory specified in 'build') in the image tag template defined globally in the project."
           ),
@@ -19,7 +20,12 @@ export const ContainerConfig = z
               .string()
               .describe(
                 "Path to the directory containing a Dockerfile to build for this container."
-              ),
+              )
+              .transform((ctxPath) => ({
+                context: ctxPath,
+                dockerfile: path.join(ctxPath, "Dockerfile"),
+                args: {},
+              })),
             z
               .object({
                 context: z.string().describe("Path to the build context"),
@@ -29,14 +35,19 @@ export const ContainerConfig = z
                   .describe("Path to the Dockerfile within the build context"),
                 args: z
                   .record(z.string(), z.string().optional())
-                  .optional()
+                  .default({})
                   .describe(
                     "Build arguments to be passed to the build. Please write numbers as strings to avoid ambiguity from number formatting"
                   ),
               })
-              .strict(),
+              .strict()
+              .default({
+                context: "",
+                dockerfile: "Dockerfile",
+                args: {},
+              }),
           ])
-          .optional(),
+          .default(""),
         replicas: z
           .number()
           .int()
@@ -47,13 +58,13 @@ export const ContainerConfig = z
           ),
         environment: z
           .record(z.string(), z.string())
-          .optional()
+          .default({})
           .describe(
             "Environment variables to set within the container. Please format all values as strings. Keys without values are not supported."
           ),
         ports: z
           .array(z.number().int())
-          .optional()
+          .default([])
           .describe(
             "Port numbers (as integers) on this container to expose to other containers within this challenge. If a port is supposed to be exposed to the Internet, make sure it is specified here, and add it to the top level 'expose' key."
           ),
@@ -61,12 +72,15 @@ export const ContainerConfig = z
           .object({
             privileged: z
               .boolean()
+              .default(false)
               .describe(
                 "Whether or not this container should be run in privileged mode."
               ),
           })
           .strict()
-          .optional(),
+          .default({
+            privileged: false,
+          }),
         resources: z
           .object({
             limits: z
@@ -100,7 +114,7 @@ export const ContainerConfig = z
         message: "Either image or build must be provided",
       })
   )
-  .optional()
+  .default({})
   .describe(
     "Containers to be deployed for this challenge. The key of each container is its name, where the container can be found via DNS lookup at runtime from other containers within this challenge."
   );

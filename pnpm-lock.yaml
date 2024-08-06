@@ -8,27 +8,15 @@ importers:
 
   bin:
     dependencies:
-      '@pulumi/docker':
-        specifier: ^4.5.4
-        version: 4.5.4(typescript@5.5.4)
       '@rcds/bundle-default':
         specifier: workspace:^
         version: link:../packages/bundles/default
-      '@rcds/loader-tscfg':
-        specifier: workspace:^
-        version: link:../packages/loaders/tscfg
       path:
         specifier: ^0.12.7
         version: 0.12.7
       rcds:
         specifier: workspace:^
         version: link:../lib
-      rcds-example-deployment:
-        specifier: 'link:'
-        version: 'link:'
-      reflect-metadata:
-        specifier: ^0.2.2
-        version: 0.2.2
 
   lib:
     dependencies:
@@ -87,6 +75,9 @@ importers:
 
   packages/loaders/classic:
     dependencies:
+      '@rcds/plugin-containers':
+        specifier: workspace:^
+        version: link:../../plugins/containers
       '@rcds/resource-fs':
         specifier: workspace:^
         version: link:../../resources/fs
@@ -124,6 +115,12 @@ importers:
         specifier: ^5.5.3
         version: 5.5.4
 
+  packages/plugins/containers:
+    dependencies:
+      '@pulumi/docker':
+        specifier: ^4.5.5
+        version: 4.5.5(typescript@5.5.4)
+
   packages/plugins/fs:
     dependencies:
       glob:
@@ -138,6 +135,12 @@ importers:
 
   packages/providers/k8s:
     dependencies:
+      '@pulumi/kubernetes':
+        specifier: ^4.15.0
+        version: 4.15.0(encoding@0.1.13)(typescript@5.5.4)
+      '@pulumi/pulumi':
+        specifier: ^3.125.0
+        version: 3.126.0(typescript@5.5.4)
       '@rcds/resource-cluster':
         specifier: workspace:^
         version: link:../../resources/cluster
@@ -350,8 +353,11 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@pulumi/docker@4.5.4':
-    resolution: {integrity: sha512-0R978Se7+NZIocYIoCAMC2q2sovar7O743zfnVQBSZRFLB+2pdZFqmpHWniM6rZtq/h5rwHsMfbJ/E6UJhihfw==}
+  '@pulumi/docker@4.5.5':
+    resolution: {integrity: sha512-+5u0A3H3PTkxGfVuvDafbdyyYT8xLzLJnKdKc2jFEpphwKlXF+lc4YhjsDLBp1cc/5JPfE4hujOxGAxwt/5BUQ==}
+
+  '@pulumi/kubernetes@4.15.0':
+    resolution: {integrity: sha512-X+EFpmcuB+bXGArA4QMvAXDM2IshkvSckcVIXsyR1XolaZ+UyCMrDHLfIzb5+nDj3LWS49A+aOWRjSWr+QynlQ==}
 
   '@pulumi/pulumi@3.126.0':
     resolution: {integrity: sha512-NPYGHeavLh8Y2quOcx0KLMAM0WWES5RoJ9iywp953iL7hSqv1W77/GjvYuhj5jdm2O9Ty2AjYs74zpfeYzkOoQ==}
@@ -426,6 +432,9 @@ packages:
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
 
+  '@types/node-fetch@2.6.11':
+    resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
+
   '@types/node@20.14.12':
     resolution: {integrity: sha512-r7wNXakLeSsGT0H1AU863vS2wa5wBOK4bWMjZz2wj+8nBx+m5PeIn0k8AloSLpRuiwdRQZwarZqHE4FNArPuJQ==}
 
@@ -437,6 +446,9 @@ packages:
 
   '@types/shimmer@1.2.0':
     resolution: {integrity: sha512-UE7oxhQLLd9gub6JKIAhDq06T0F6FnztwMNRvYgjeQSBeMc1ZG/tA47EwfduvkuQS8apbkM/lpLpWsaCeYsXVg==}
+
+  '@types/tmp@0.0.33':
+    resolution: {integrity: sha512-gVC1InwyVrO326wbBZw+AO3u2vRXz/iRWq9jYhpG4W8LXyIgDv3ZmcLQ5Q4Gs+gFMyqx+viFoFT+l3p61QFCmQ==}
 
   '@types/tmp@0.2.6':
     resolution: {integrity: sha512-chhaNf2oKHlRkDGt+tiKE2Z5aJ6qalm7Z9rlLdBwmOiAAf09YQvvoLXjWK4HWPF1xU/fqvMgfNfpVoBscA/tKA==}
@@ -931,6 +943,15 @@ packages:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
 
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+
   node-gyp@10.2.0:
     resolution: {integrity: sha512-sp3FonBAaFe4aYTcFdZUn2NYkbP7xroPGYvQmP4Nl5PxamznItBnNCgjrVTKrEfQynInMsJvZrdmqUnysCJ8rw==}
     engines: {node: ^16.14.0 || >=18.0.0}
@@ -987,6 +1008,10 @@ packages:
   onetime@5.1.2:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
+
+  os-tmpdir@1.0.2:
+    resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
+    engines: {node: '>=0.10.0'}
 
   p-cancelable@2.1.1:
     resolution: {integrity: sha512-BZOr3nRQHOntUjTrH8+Lh54smKHoHyur8We1V8DSMVrl5A2malOOwuJRnKRDjSnkoeBh4at6BwEnb5I7Jl31wg==}
@@ -1151,6 +1176,9 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
+  shell-quote@1.8.1:
+    resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
+
   shiki@1.11.1:
     resolution: {integrity: sha512-VHD3Q0EBXaaa245jqayBe5zQyMQUdXBFjmGr9MpDaDpAKRMYn7Ff00DM5MLk26UyKjnml3yQ0O2HNX7PtYVNFQ==}
 
@@ -1237,9 +1265,16 @@ packages:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
     engines: {node: '>=10'}
 
+  tmp@0.0.33:
+    resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
+    engines: {node: '>=0.6.0'}
+
   tmp@0.2.3:
     resolution: {integrity: sha512-nZD7m9iCPC5g0pYmcaxogYKggSfLsdxl8of3Q/oIbqCqLLIO9IAF0GWjX1z9NZRHPiXv8Wex4yDCaZsgEw0Y8w==}
     engines: {node: '>=14.14'}
+
+  tr46@0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
   treeverse@3.0.0:
     resolution: {integrity: sha512-gcANaAnd2QDZFmHFEOF4k7uc1J/6a6z3DJMd/QwEyxLoKGiptJRwid582r7QIsFlFMIZ3SnxfS52S4hm2DHkuQ==}
@@ -1301,6 +1336,12 @@ packages:
 
   walk-up-path@3.0.1:
     resolution: {integrity: sha512-9YlCL/ynK3CTlrSRrDxZvUauLzAswPCrsaCgilqFevUYpeEW0/3ScEjaa3kbW/T0ghhkEr7mv+fpjqn1Y1YuTA==}
+
+  webidl-conversions@3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+
+  whatwg-url@5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -1617,12 +1658,28 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@pulumi/docker@4.5.4(typescript@5.5.4)':
+  '@pulumi/docker@4.5.5(typescript@5.5.4)':
     dependencies:
       '@pulumi/pulumi': 3.126.0(typescript@5.5.4)
       semver: 5.7.2
     transitivePeerDependencies:
       - bluebird
+      - supports-color
+      - ts-node
+      - typescript
+
+  '@pulumi/kubernetes@4.15.0(encoding@0.1.13)(typescript@5.5.4)':
+    dependencies:
+      '@pulumi/pulumi': 3.126.0(typescript@5.5.4)
+      '@types/node-fetch': 2.6.11
+      '@types/tmp': 0.0.33
+      glob: 10.4.5
+      node-fetch: 2.7.0(encoding@0.1.13)
+      shell-quote: 1.8.1
+      tmp: 0.0.33
+    transitivePeerDependencies:
+      - bluebird
+      - encoding
       - supports-color
       - ts-node
       - typescript
@@ -1735,6 +1792,11 @@ snapshots:
     dependencies:
       '@types/node': 20.14.12
 
+  '@types/node-fetch@2.6.11':
+    dependencies:
+      '@types/node': 20.14.12
+      form-data: 4.0.0
+
   '@types/node@20.14.12':
     dependencies:
       undici-types: 5.26.5
@@ -1746,6 +1808,8 @@ snapshots:
   '@types/semver@7.5.8': {}
 
   '@types/shimmer@1.2.0': {}
+
+  '@types/tmp@0.0.33': {}
 
   '@types/tmp@0.2.6': {}
 
@@ -2214,6 +2278,12 @@ snapshots:
 
   negotiator@0.6.3: {}
 
+  node-fetch@2.7.0(encoding@0.1.13):
+    dependencies:
+      whatwg-url: 5.0.0
+    optionalDependencies:
+      encoding: 0.1.13
+
   node-gyp@10.2.0:
     dependencies:
       env-paths: 2.2.1
@@ -2293,6 +2363,8 @@ snapshots:
   onetime@5.1.2:
     dependencies:
       mimic-fn: 2.1.0
+
+  os-tmpdir@1.0.2: {}
 
   p-cancelable@2.1.1: {}
 
@@ -2457,6 +2529,8 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
+  shell-quote@1.8.1: {}
+
   shiki@1.11.1:
     dependencies:
       '@shikijs/core': 1.11.1
@@ -2556,7 +2630,13 @@ snapshots:
       mkdirp: 1.0.4
       yallist: 4.0.0
 
+  tmp@0.0.33:
+    dependencies:
+      os-tmpdir: 1.0.2
+
   tmp@0.2.3: {}
+
+  tr46@0.0.3: {}
 
   treeverse@3.0.0: {}
 
@@ -2613,6 +2693,13 @@ snapshots:
   validate-npm-package-name@5.0.1: {}
 
   walk-up-path@3.0.1: {}
+
+  webidl-conversions@3.0.1: {}
+
+  whatwg-url@5.0.0:
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
 
   which@2.0.2:
     dependencies:
