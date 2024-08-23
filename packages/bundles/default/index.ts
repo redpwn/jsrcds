@@ -10,13 +10,14 @@ interface Config {
   repoRoot: string;
 }
 
-export class DefaultBundle extends Bundle<Config, any, any, any> {
+export class DefaultBundle extends Bundle<Config> {
   async getLoaders() {
     const storage = new LocalStorage(this.config.repoRoot);
-    const containers = new Containers();
+    const containers = new Containers(storage);
 
     return [new ClassicLoader({}, storage, containers)];
   }
+
   async getPlugins() {
     return [];
   }

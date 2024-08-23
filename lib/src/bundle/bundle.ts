@@ -3,12 +3,12 @@ import { Plugin } from "rcds/plugin";
 
 import { Deployment } from "rcds/deployment";
 
-export abstract class Bundle<T, LoaderConfig, PluginConfig, ProviderConfig> {
+export abstract class Bundle<T = unknown> {
   constructor(protected config: T) {}
 
-  abstract getLoaders(): Promise<Loader<LoaderConfig>[]>;
-  abstract getPlugins(): Promise<Plugin<PluginConfig>[]>;
-  abstract getProviders(): Promise<Loader<ProviderConfig>[]>;
+  abstract getLoaders(): Promise<Loader[]>;
+  abstract getPlugins(): Promise<Plugin[]>;
+  abstract getProviders(): Promise<Loader[]>;
 
   async deployChallenges() {
     const loaders = await this.getLoaders();

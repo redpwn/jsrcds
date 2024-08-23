@@ -1,3 +1,3 @@
-export abstract class Plugin<T> {
+export abstract class Plugin<T = unknown> {
   constructor(protected config: T) {}
 }

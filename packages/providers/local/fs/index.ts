@@ -5,11 +5,11 @@ import { glob } from "glob";
 import { readFile } from "fs/promises";
 
 export class LocalStorage implements FileStorage {
-  constructor(private root: string) {}
+  constructor(public root: string) {}
 
   async glob(
     pattern: string,
-    options: { absolute: true; cwd: string }
+    options: { absolute: boolean; cwd: string }
   ): Promise<string[]> {
     return glob(pattern, { ...options, cwd: this.root });
   }

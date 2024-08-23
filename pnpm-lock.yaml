@@ -121,6 +121,15 @@ importers:
         specifier: ^5.5.3
         version: 5.5.4
 
+  packages/plugins/challenge:
+    dependencies:
+      '@pulumi/pulumi':
+        specifier: ^3.125.0
+        version: 3.126.0(typescript@5.5.4)
+      '@rcds/plugin-containers':
+        specifier: workspace:^
+        version: link:../containers
+
   packages/plugins/containers:
     dependencies:
       '@pulumi/docker':
@@ -129,6 +138,15 @@ importers:
       '@pulumi/docker-build':
         specifier: ^0.0.4
         version: 0.0.4(typescript@5.5.4)
+      '@pulumi/pulumi':
+        specifier: ^3.125.0
+        version: 3.126.0(typescript@5.5.4)
+      '@rcds/provider-local':
+        specifier: workspace:^
+        version: link:../../providers/local
+      '@rcds/resource-fs':
+        specifier: workspace:^
+        version: link:../../resources/fs
 
   packages/plugins/fs:
     dependencies:

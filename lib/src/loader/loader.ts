@@ -6,7 +6,7 @@
  * @remarks
  * we may want this class to do other things in the future
  */
-export abstract class Loader<T> {
+export abstract class Loader<T = unknown> {
   constructor(protected config: T) {}
 
   /**

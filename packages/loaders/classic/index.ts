@@ -1,9 +1,10 @@
 import { Loader } from "rcds/loader";
 
-import { type FileStorage } from "@rcds/resource-fs";
+import { FileStorage } from "@rcds/resource-fs";
 import { Containers } from "@rcds/plugin-containers";
 
 import { parse } from "yaml";
+import path from "path";
 
 import { createChallengeConfigSchema, type ChallengeConfig } from "./schema";
 
@@ -13,7 +14,7 @@ export class ClassicLoader extends Loader<ClassicLoaderConfig> {
   constructor(
     config: ClassicLoaderConfig,
     private fs: FileStorage,
-    private containers: Containers
+    private challenge: Challenge
   ) {
     super(config);
   }
@@ -27,37 +28,47 @@ export class ClassicLoader extends Loader<ClassicLoaderConfig> {
     console.log("challenge list", challengeList);
 
     return await Promise.all(
-      challengeList.map(async (globPath) => {
-        const rawConfig = await this.getChallengeConfig(globPath);
-        const config = this.validateChallengeConfig(rawConfig);
-
-        return () => {
-          Object.entries(config.containers).map(
-            async ([name, containerConfig]) => {
-              const hash = this.containers.buildImage(name, "newo");
-            }
-          );
-
-          // this.runtime.deployChallenge({
-          //   name: config.id,
-          // });
-          // const urls = this.bucket.uploadFiles({
-          //   // ...
-          // });
-          // this.scoreboard.pushChallenge({
-          //   // ...
-          // });
-        };
-      })
+      challengeList.map(async (globPath) => this.getChallenge(globPath))
     );
   }
 
-  validateChallengeConfig(config: any): ChallengeConfig {
-    return createChallengeConfigSchema().parse(config);
+  async getChallenge(globPath: string) {
+    const challengeDirectory = path.dirname(globPath);
+    const config = await this.getChallengeConfig(globPath);
+
+    return () => {
+      console.log(config.containers);
+
+      const hash = this.containers.buildImages(
+        challengeDirectory,
+        Object.entries(config.containers).map(([name, containerConfig]) => ({
+          name,
+          ...containerConfig,
+        }))
+      );
+      // this.runtime.deployChallenge({
+      //   name: config.id,
+      // });
+      // const urls = this.bucket.uploadFiles({
+      //   // ...
+      // });
+      // this.scoreboard.pushChallenge({
+      //   // ...
+      // });
+    };
   }
 
-  async getChallengeConfig(path: string): Promise<any> {
+  validateChallengeConfig(config: any): ChallengeConfig {
+    return createChallengeConfigSchema(this.fs).parse(config);
+  }
+
+  async parseChallengeConfig(path: string): Promise<any> {
     const challengeYaml = await this.fs.readFile(path);
     return parse(challengeYaml);
+  }
+
+  async getChallengeConfig(path: string): Promise<ChallengeConfig> {
+    const rawConfig = await this.parseChallengeConfig(path);
+    return this.validateChallengeConfig(rawConfig);
   }
 }

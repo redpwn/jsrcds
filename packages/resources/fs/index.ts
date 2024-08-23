@@ -1,8 +1,8 @@
-export interface FileStorage {
-  glob(
+export abstract class FileStorage {
+  abstract glob(
     pattern: string,
-    options?: { absolute: true; cwd: string }
+    options?: { absolute: boolean; cwd: string }
   ): Promise<string[]>;
 
-  readFile(path: string): Promise<string>;
+  abstract readFile(path: string): Promise<string>;
 }

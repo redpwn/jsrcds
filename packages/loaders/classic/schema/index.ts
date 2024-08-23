@@ -3,8 +3,9 @@ import { domainSafeName } from "./utils";
 import { ProvideConfig } from "./provide";
 import { ContainerConfig } from "./containers";
 import ExposeConfig from "./expose";
+import type { FileStorage } from "@rcds/resource-fs";
 
-export const createChallengeConfigSchema = () =>
+export const createChallengeConfigSchema = (fs: FileStorage) =>
   z
     .object({
       id: domainSafeName
