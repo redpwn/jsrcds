@@ -115,6 +115,13 @@ export const ContainerConfig = z
       })
   )
   .default({})
+  .transform((containers) =>
+    // flatten container keys into list
+    Object.entries(containers).map(([name, containerConfig]) => ({
+      name,
+      ...containerConfig,
+    }))
+  )
   .describe(
     "Containers to be deployed for this challenge. The key of each container is its name, where the container can be found via DNS lookup at runtime from other containers within this challenge."
   );

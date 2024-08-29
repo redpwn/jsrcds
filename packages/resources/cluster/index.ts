@@ -1,5 +1,5 @@
 export interface ContainerDeployment {}
 
 export interface Cluster {
-  deployContainer(container: ContainerDeployment): void;
+  createNamespace(namespace: any): void;
 }

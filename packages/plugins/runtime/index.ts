@@ -1,3 +1,5 @@
-class Runtime {
-  constructor(private);
+export interface RuntimeDeployment {}
+
+export class RuntimePlugin {
+  deployContainer(deployment: RuntimeDeployment) {}
 }

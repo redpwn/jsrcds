@@ -3,7 +3,7 @@ import pulumi from "@pulumi/pulumi";
 
 import assert from "assert";
 
-import { FileStorage } from "@rcds/resource-fs";
+// import { FileStorage } from "@rcds/resource-fs";
 import { LocalStorage } from "@rcds/provider-local/fs";
 
 import path from "path";
@@ -17,9 +17,9 @@ export interface BuildImageArgs {
 }
 
 // TODO: make containers fs agnostic
-export class Containers {
+export class ContainersPlugin {
   constructor(private fs: LocalStorage) {
-    assert(fs instanceof FileStorage);
+    assert(fs instanceof LocalStorage);
   }
 
   buildImages(

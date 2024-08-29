@@ -160,17 +160,23 @@ importers:
         specifier: workspace:^
         version: link:../../resources/fs
 
-  packages/plugins/fs:
-    dependencies:
-      glob:
-        specifier: ^10.3.10
-        version: 10.4.5
-
   packages/plugins/media:
     dependencies:
       rcds:
         specifier: workspace:^
         version: link:../../../lib
+
+  packages/plugins/runtime:
+    dependencies:
+      '@pulumi/pulumi':
+        specifier: ^3.125.0
+        version: 3.126.0(typescript@5.5.4)
+      '@rcds/provider-local':
+        specifier: workspace:^
+        version: link:../../providers/local
+      '@rcds/resource-fs':
+        specifier: workspace:^
+        version: link:../../resources/fs
 
   packages/providers/k8s:
     dependencies:
@@ -198,6 +204,18 @@ importers:
   packages/resources/cluster: {}
 
   packages/resources/fs:
+    dependencies:
+      glob:
+        specifier: ^10.3.10
+        version: 10.4.5
+
+  packages/resources/registry:
+    dependencies:
+      glob:
+        specifier: ^10.3.10
+        version: 10.4.5
+
+  packages/resources/scoreboard:
     dependencies:
       glob:
         specifier: ^10.3.10

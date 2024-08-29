@@ -1,0 +1,16 @@
+{
+  "name": "@rcds/plugin-runtime",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@pulumi/pulumi": "^3.125.0",
+    "@rcds/provider-local": "workspace:^",
+    "@rcds/resource-fs": "workspace:^"
+  }
+}

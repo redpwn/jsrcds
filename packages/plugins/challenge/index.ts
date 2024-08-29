@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import { Containers, type BuildImageArgs } from "@rcds/plugin-containers";
+import { ContainersPlugin, type BuildImageArgs } from "@rcds/plugin-containers";
 import type { Cluster } from "@rcds/resource-cluster";
 
 interface ChallengeArgs {
@@ -7,8 +7,8 @@ interface ChallengeArgs {
   containers: BuildImageArgs[];
 }
 
-export class Challenge {
-  constructor(private containers: Containers, private cluster: Cluster) {}
+export class ChallengePlugin {
+  constructor(private containers: ContainersPlugin, private cluster: Cluster) {}
 
   createChallenge(args: ChallengeArgs) {
     const challenge = new ChallengeComponent(args.name, {});
