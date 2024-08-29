@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@pulumi/pulumi": "^3.125.0",
-    "@rcds/plugin-containers": "workspace:^"
+    "@rcds/plugin-containers": "workspace:^",
+    "@rcds/resource-cluster": "workspace:^"
   }
 }

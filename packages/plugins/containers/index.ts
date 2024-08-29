@@ -1,6 +1,5 @@
 import * as dockerBuild from "@pulumi/docker-build";
 import pulumi from "@pulumi/pulumi";
-import * as docker from "@pulumi/docker";
 
 import assert from "assert";
 
@@ -9,7 +8,7 @@ import { LocalStorage } from "@rcds/provider-local/fs";
 
 import path from "path";
 
-interface BuildImageArgs {
+export interface BuildImageArgs {
   name: string;
   build: {
     dockerfile: string;
@@ -20,14 +19,14 @@ interface BuildImageArgs {
 // TODO: make containers fs agnostic
 export class Containers {
   constructor(private fs: LocalStorage) {
-    assert(fs instanceof LocalStorage);
+    assert(fs instanceof FileStorage);
   }
 
   buildImages(
     dir: string,
     options: BuildImageArgs[],
     opts?: pulumi.CustomResourceOptions
-  ) {
+  ): dockerBuild.Image[] {
     const absDir = path.join(this.fs.root, dir);
     return options.map(({ name, build }) => {
       const container = new dockerBuild.Image(

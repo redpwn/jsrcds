@@ -12,7 +12,9 @@
   "dependencies": {
     "@rcds/loader-classic": "workspace:^",
     "@rcds/loader-tscfg": "workspace:^",
+    "@rcds/plugin-challenge": "workspace:^",
     "@rcds/plugin-containers": "workspace:^",
+    "@rcds/provider-k8s": "workspace:^",
     "@rcds/provider-local": "workspace:^",
     "rcds": "workspace:^"
   }

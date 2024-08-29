@@ -1,5 +1,5 @@
 {
-  "name": "k8s",
+  "name": "@rcds/provider-k8s",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

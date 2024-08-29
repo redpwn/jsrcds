@@ -66,9 +66,15 @@ importers:
       '@rcds/loader-tscfg':
         specifier: workspace:^
         version: link:../../loaders/tscfg
+      '@rcds/plugin-challenge':
+        specifier: workspace:^
+        version: link:../../plugins/challenge
       '@rcds/plugin-containers':
         specifier: workspace:^
         version: link:../../plugins/containers
+      '@rcds/provider-k8s':
+        specifier: workspace:^
+        version: link:../../providers/k8s
       '@rcds/provider-local':
         specifier: workspace:^
         version: link:../../providers/local
@@ -78,6 +84,9 @@ importers:
 
   packages/loaders/classic:
     dependencies:
+      '@rcds/plugin-challenge':
+        specifier: workspace:^
+        version: link:../../plugins/challenge
       '@rcds/plugin-containers':
         specifier: workspace:^
         version: link:../../plugins/containers
@@ -129,6 +138,9 @@ importers:
       '@rcds/plugin-containers':
         specifier: workspace:^
         version: link:../containers
+      '@rcds/resource-cluster':
+        specifier: workspace:^
+        version: link:../../resources/cluster
 
   packages/plugins/containers:
     dependencies:

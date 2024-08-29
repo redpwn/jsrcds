@@ -1,7 +1,7 @@
 import { Loader } from "rcds/loader";
 
 import { FileStorage } from "@rcds/resource-fs";
-import { Containers } from "@rcds/plugin-containers";
+import { Challenge } from "@rcds/plugin-challenge";
 
 import { parse } from "yaml";
 import path from "path";
@@ -37,24 +37,17 @@ export class ClassicLoader extends Loader<ClassicLoaderConfig> {
     const config = await this.getChallengeConfig(globPath);
 
     return () => {
-      console.log(config.containers);
-
-      const hash = this.containers.buildImages(
-        challengeDirectory,
-        Object.entries(config.containers).map(([name, containerConfig]) => ({
+      const containers = Object.entries(config.containers).map(
+        ([name, containerConfig]) => ({
           name,
           ...containerConfig,
-        }))
+        })
       );
-      // this.runtime.deployChallenge({
-      //   name: config.id,
-      // });
-      // const urls = this.bucket.uploadFiles({
-      //   // ...
-      // });
-      // this.scoreboard.pushChallenge({
-      //   // ...
-      // });
+
+      this.challenge.createChallenge({
+        name: config.name,
+        containers: containers,
+      });
     };
   }
 

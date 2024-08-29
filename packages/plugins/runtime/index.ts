@@ -1,1 +1,3 @@
-class ClusterDeployment {}
+class Runtime {
+  constructor(private);
+}

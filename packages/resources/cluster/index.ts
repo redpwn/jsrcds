@@ -1,3 +1,5 @@
+export interface ContainerDeployment {}
+
 export interface Cluster {
-  // deployContainer(): void;
+  deployContainer(container: ContainerDeployment): void;
 }
