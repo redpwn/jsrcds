@@ -1,30 +1,34 @@
-// import { Plugin } from "../../../../lib/plugin";
-
-// export class Rctf extends Plugin {
-//   public readonly name = "rctf";
-// }
-import { auth as googleAuth } from "google-auth-library";
+import * as pulumi from "@pulumi/pulumi";
 import got from "got";
-import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
-import config from "../../config.js";
-import { isSpeculative } from "../../../lib/util.js";
-
 import type { ChallengeObject, Scoreboard } from "../../resources/scoreboard";
 
-interface ChallengeFile {
+let authToken: string = "";
+let prefixUrl: string = "";
+let cachedFetchClient: Got = null; // FIXME: fix got types
+
+const loadFetchClient = () => {
+  return got.extend({
+    prefixUrl: prefixUrl, 
+    headers: { authorization: `Bearer ${authToken}` },
+    resolveBodyOnly: true,
+    responseType: "json",
+  });
+};
+
+const fetchClient = async (...rest: unknown[]) => {
+  if (!cachedFetchClient) {
+    cachedFetchClient = loadFetchClient();
+  }
+  return (cachedFetchClient)(...rest);
+};
+
+// dynamic providers require pulumi input wrapped types for resources and unwrapped types for providers
+interface ChallengeFileRaw {
   name: string,
   url: string
 }
 
-type Method = "GET" | "PUSH" | "PUT" | "DELETE";
-
-interface Payload {
-  url: string,
-  method: Method,
-  json?: any
-}
-
-export interface RctfChallenge extends ChallengeObject {
+export interface RctfChallengeRaw {
 	name: string,
 	description: string,
 	id: string,
@@ -37,43 +41,33 @@ export interface RctfChallenge extends ChallengeObject {
 	flag: string,
   tiebreakEligible: boolean,
   sortWeight: boolean,
+  files: ChallengeFileRaw[]
+}
+
+interface ChallengeFile {
+  name: pulumi.Input<string>,
+  url: pulumi.Input<string>
+}
+
+export interface RctfChallenge extends ChallengeObject {
+	name: pulumi.Input<string>,
+	description: pulumi.Input<string>,
+	id: pulumi.Input<string>,
+	author: pulumi.Input<string>,
+	category: pulumi.Input<string>,
+	points: {
+		min: pulumi.Input<Number>,
+		max: pulumi.Input<Number>,
+	},
+	flag: pulumi.Input<string>,
+  tiebreakEligible: pulumi.Input<boolean>,
+  sortWeight: pulumi.Input<boolean>,
   files: ChallengeFile[]
 }
 
-export class RctfScoreboard implements Scoreboard {
-  savedReq: any;
-
-  async getReq() {
-    const secretManager = new SecretManagerServiceClient({
-      authClient: googleAuth,
-    });
-    const secretName = isSpeculative
-      ? config.scoreboard.rctf.tokenNames.read
-      : config.scoreboard.rctf.tokenNames.write;
-    const [secret] = await secretManager.accessSecretVersion({
-      name: secretManager.secretVersionPath(
-        config.googleProject,
-        secretName,
-        "latest"
-      ),
-    });
-    return got.extend({
-      prefixUrl: `${config.scoreboard.rctf.url}/api/v1/admin`,
-      headers: { authorization: `Bearer ${secret.payload.data.toString()}` },
-      resolveBodyOnly: true,
-      responseType: "json",
-    });
-  };
-
-  async req(...rest: Payload[]) {
-    if (!this.savedReq) {
-      this.savedReq = this.getReq();
-    }
-    return (await this.savedReq)(...rest);
-  };
-
-  async createChallenge(challenge: RctfChallenge): Promise<void> {
-    const { kind } = await this.req({
+class RctfChallengeProvider implements pulumi.dynamic.ResourceProvider  {
+  async create(challenge: RctfChallengeRaw): Promise<pulumi.dynamic.CreateResult> {
+    const { kind, data } = await fetchClient({
       url: `challs/${encodeURIComponent(challenge.id)}`,
       method: "PUT",
       json: { data: challenge },
@@ -81,5 +75,56 @@ export class RctfScoreboard implements Scoreboard {
     if (kind !== "goodChallengeUpdate") {
       throw new Error(`rctf error: ${kind}`);
     }
+
+    return { id: data.id.toString(), outs: data };
+  }
+
+  async read(challengeId: string, props: {}) {
+    const { kind, data } = await fetchClient(`challs/${encodeURIComponent(challengeId)}`);
+    if (kind !== "goodChallenges") {
+      throw new Error(`rctf error: ${kind}`);
+    }
+
+    return { id: data.id.toString(), outs: data };
+  }
+
+  async update(challengeId: string, oldChallenge: RctfChallengeRaw, newChallenge: RctfChallengeRaw) {
+    const { kind, data } = await fetchClient({
+      url: `challs/${encodeURIComponent(challengeId)}`,
+      method: "PUT",
+      json: { data: newChallenge },
+    });
+    if (kind !== "goodChallengeUpdate") {
+      throw new Error(`rctf error: ${kind}`);
+    }
+
+    return { outs: data };
+  }
+
+  async delete(id: string, props: {}) {
+    const { kind } = await fetchClient({
+      url: `challs/${encodeURIComponent(id)}`,
+      method: "DELETE",
+    });
+    if (kind !== "goodChallengeDelete") {
+      throw new Error(`rctf error: ${kind}`);
+    }
+  }
+}
+
+class RctfChallengeResource extends pulumi.dynamic.Resource {
+    constructor(name: string, challengeProps: RctfChallengeRaw, opts?: pulumi.CustomResourceOptions) {
+        super(RctfChallengeProvider, name, challengeProps, opts);
+    }
+}
+
+export class RctfScoreboard implements Scoreboard {
+  constructor(rctfToken: string, apiBase: string) {
+    authToken = rctfToken;
+    prefixUrl = apiBase;
+  }
+
+  createChallenge(challenge: RctfChallengeRaw) {
+    new RctfChallengeResource(challenge.name, challenge);
   }
 }
